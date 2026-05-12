@@ -14,17 +14,23 @@
     <div id="cursor-effect"></div>
     <div id="hover-container"></div>
 
-    <header>
-        <div class="header-content">
-            <a href="index.html" class="logo" style="text-decoration: none;">VG</a>
-            <nav>
-                <a href="about.html">about me</a>
-                <a href="projects.html">projects</a>
-                <a href="index.html#contacts">contacts</a>
-                <span class="lang-switch">IT | EN</span>
-            </nav>
+     <header>
+    <div class="header-content">
+        <a href="index.html" class="logo" style="text-decoration: none;">VG</a>
+        
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
         </div>
-    </header>
+
+        <nav id="nav-menu">
+            <a href="about.html">about me</a>
+            <a href="projects.html">projects</a>
+            <a href="#contacts">contacts</a>
+            <span class="lang-switch">IT | EN</span>
+        </nav>
+    </div>
+</header>
 
     <main class="projects-container">
         <div class="projects-list">
@@ -91,7 +97,23 @@
 </footer>
 
     <script>
-            const hoverContainer = document.getElementById('hover-container');
+                   const burger = document.getElementById('burger');
+        const nav = document.getElementById('nav-menu');
+
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            burger.classList.toggle('active'); // Fa incrociare le linee e le colora di arancione
+        });
+
+        // Chiudi il menu quando clicchi un link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                burger.classList.remove('active');
+            });
+        });
+        
+        const hoverContainer = document.getElementById('hover-container');
         const projectItems = document.querySelectorAll('.project-item');
         const cursor = document.getElementById('cursor-effect');
 

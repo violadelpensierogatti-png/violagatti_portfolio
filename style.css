@@ -515,6 +515,70 @@ nav a:hover, .lang-switch:hover {
     opacity: 0.7;
     transform: translateX(10px); /* Sposta tutto il blocco leggermente a destra */
 }
+
+/* --- ADAPTIVE LAYOUT (MOBILE) --- */
+
+@media screen and (max-width: 768px) {
+    .about-container {
+        flex-direction: column; /* Impila le colonne verticalmente */
+        height: auto;           /* Permette alla pagina di allungarsi */
+        overflow-y: visible;    /* Abilita lo scroll naturale */
+        padding-top: 100px;     /* Più spazio per l'header mobile */
+    }
+
+    /* Colonna 1: Immagine */
+    .col-image {
+        width: 100%;
+        height: auto;
+        padding: 20px 5%;     /* Margini laterali uniformi */
+        justify-content: center;
+    }
+
+    .fixed-img {
+        max-height: 50vh;      /* Non troppo grande per lasciare spazio al testo */
+        filter: grayscale(0%); /* Sempre a colori su mobile */
+    }
+
+    /* Colonna 2: Testo di presentazione (Info Mono) */
+    .col-info {
+        width: 100%;
+        height: auto;
+        padding: 30px 5%;
+        justify-content: flex-start; /* Su mobile meglio allineato in alto */
+    }
+
+    .info-bottom p {
+        font-size: 0.95rem;    /* Leggermente più piccolo per leggibilità */
+        text-align: left;
+    }
+
+    /* Colonna 3: Curriculum */
+    .col-text {
+        width: 100%;
+        height: auto;
+        padding: 40px 5%;      /* Reset del padding 20vh del desktop */
+        overflow-y: visible;   /* Lo scroll è gestito dal body */
+    }
+
+    /* Ottimizzazione dettagli curriculum */
+    .resume-item {
+        padding-left: 0;       /* Rimuoviamo lo sbalzo a destra per guadagnare spazio */
+        margin-bottom: 35px;
+    }
+
+    .section-title {
+        margin-bottom: 25px;
+        font-size: 0.9rem;
+    }
+
+    .cv-link {
+        padding-left: 0;       /* Allineato a sinistra */
+        margin-top: 20px;
+        margin-bottom: 60px;
+        width: 100%;
+        text-align: left;
+    }
+}
 /* --- Pagina Projects --- */
 
 .body-projects {
@@ -859,36 +923,48 @@ centered-row img {
     100% { opacity: 0; } /* Resta invisibile fino al prossimo ciclo */
 }
 
-/* Mobile */
+/* --- Fix Versione Mobile Progetti --- */
 @media screen and (max-width: 768px) {
     .project-detail-container {
-        height: auto;
-        flex-direction: column-reverse;
-        overflow: visible;
+        display: flex !important;
+        flex-direction: column-reverse !important; /* Inverte l'ordine: Sidebar (testo) sopra, Gallery sotto */
+        height: auto !important;
+        overflow: visible !important;
     }
-    .col-gallery, .col-sidebar {
-        width: 100%;
-        height: auto;
-        overflow: visible;
-        padding: 40px 5%;
+
+    /* Forza entrambe le colonne a occupare tutta la larghezza */
+    .col-gallery, 
+    .col-sidebar, 
+    .project-sidebar { 
+        width: 100% !important;
+        height: auto !important;
+        padding: 40px 5% !important;
+        overflow: visible !important;
+        position: relative !important;
     }
-    .image-row {
-        flex-direction: column; /* Su mobile tornano una sotto l'altra */
-        gap: 20px;
+
+    /* Rimuove lo spazio eccessivo in cima alla gallery ora che è sotto */
+    .col-gallery {
+        padding-top: 0 !important; 
+        gap: 50px !important; /* Distanza tra un'immagine e l'altra */
     }
-    
-    .image-row img {
-        width: 100%; /* Tornano a larghezza piena */
-    }
+
+    /* Le righe di immagini (2 o 3 foto) diventano una colonna singola */
+    .image-row, 
+    .centered-row, 
     #appzonzo {
-        flex-direction: column;
-        gap: 30px;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 20px !important;
     }
+
+    .image-row img, 
+    .centered-row img, 
     #appzonzo img {
-        width: 100%;
+        width: 100% !important;
+        max-width: none !important;
     }
 }
-
 .vimeo-container {
     position: relative;
     padding-bottom: 56.25%; /* Ratio 16:9 */
@@ -910,9 +986,6 @@ centered-row img {
     transition: filter 0.5s ease;
 }
 
-.vimeo-container:hover iframe {
-    filter: grayscale(0%);
-}
 /* Quando il video ha la classe 'is-playing', rimuoviamo il grayscale */
 .vimeo-container.is-playing iframe {
     filter: grayscale(0%) !important;
