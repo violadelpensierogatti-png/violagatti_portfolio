@@ -84,88 +84,92 @@ nav a:hover, .lang-switch:hover {
     margin-top: 50px;
 }
 
-/*--- FOOTER---*/
+/*--- FOOTER A STRISCIA ---*/
 .site-footer {
-    position: relative; /* Lo assicura nel flusso normale */
     width: 100%;
-    background-color: var(--bg-color);
-    padding: 120px 5% 60px 5%;
-    margin-top: 0; /* Lo attacchiamo alla fine della gallery */
-    z-index: 100; /* Lo portiamo sopra eventuali background */
-    clear: both; /* Rompe eventuali float */
-    display: block !important; /* Forza la visualizzazione */
+    background-color: var(--primary); /* Colore principale come sfondo */
+    padding: 40px 5%; /* Ridotto il padding per renderlo una fascia più compatta */
+    margin-top: 0;
+    z-index: 100;
 }
+
 .footer-content {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center; /* Allineamento centrale per un look più pulito */
+    margin: 0 auto;
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .footer-label {
     font-family: 'IBM Plex Mono', monospace;
-    color: var(--secondary);
-    font-size: 0.8rem;
+    color: #ededed; /* Colore chiaro per contrasto */
+    font-size: 0.7rem;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 0;
+    opacity: 0.8;
 }
 
 .footer-email {
-    font-family: 'Uncut Sans', sans-serif;
-    font-size: 2vw; /* Grande e d'impatto */
+    font-family: 'IBM Plex Mono', monospace; /* Cambiato a Mono per coerenza */
+    font-size: 1rem; /* Mail molto più piccola rispetto a prima */
     font-weight: 400;
-    color: var(--primary);
+    color: #ffffff;
     text-decoration: none;
-    line-height: 1;
-    transition: color 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
 .footer-email:hover {
-    color: var(--secondary);
+    opacity: 0.7;
+    color: #ffffff; /* Evitiamo che cambi colore se non necessario */
 }
 
 .footer-right {
     text-align: right;
     font-family: 'IBM Plex Mono', monospace;
+    color: #ffffff;
+}
+
+.social-links {
+    margin-bottom: 5px;
 }
 
 .social-links a {
+    color: #ffffff;
     text-decoration: none;
-    color: var(--primary);
+    font-size: 0.8rem;
     margin-left: 20px;
-    font-size: 0.9rem;
-    transition: color 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
 .social-links a:hover {
-    color: var(--secondary);
+    opacity: 0.7;
 }
 
 .copyright {
-    margin-top: 20px;
     font-size: 0.7rem;
-    color: var(--primary);
     opacity: 0.6;
+    margin: 0;
 }
 
-/* --- FOOTER ADAPTIVE --- */
+/* Fix per Mobile */
 @media screen and (max-width: 768px) {
     .footer-content {
         flex-direction: column;
         align-items: flex-start;
+        gap: 30px;
     }
-
-    .footer-email {
-        font-size: 8vw; /* Più leggibile su mobile */
-    }
-
     .footer-right {
-        margin-top: 50px;
         text-align: left;
     }
-
     .social-links a {
         margin-left: 0;
-        margin-right: 20px;
+        margin-right: 15px;
     }
 }
 
@@ -191,14 +195,16 @@ nav a:hover, .lang-switch:hover {
 #cursor-effect:active {
     transform: translate(-50%, -50%) scale(0.8);
 }
-/* Hero posizionata in fondo */
+
+/* Hero posizionata in fondo con fix per mobile */
 .hero {
     height: 100vh;
+    height: 100dvh; /* Altezza dinamica che ignora le barre del browser mobile */
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Spinge tutto in fondo */
-    padding-bottom: 4vh; /* Spazio dal bordo inferiore dello schermo */
+    justify-content: flex-end; 
+    padding-bottom: 4vh;
 }
 
 .hero-bottom-container {
@@ -342,31 +348,8 @@ nav a:hover, .lang-switch:hover {
         width: 94%; /* Manteniamo la stessa proporzione del desktop */
         margin: 0 auto;
     }
-    /* --- HERO ADAPTIVE --- */
-    .hero-bottom-container {
-        width: 94%; /* Manteniamo la stessa proporzione del desktop */
-        margin: 0 auto;
-    }
-
-    .hero-subtitle {
-        font-size: 3.5vw; /* Proporzionale per non sovrastare il titolo */
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        margin-bottom: 1vw;
-    }
-
-    .hero-title {
-        font-size: 15.2vw; /* Stessa dimensione desktop o leggermente regolata */
-        line-height: 0.8;
-        white-space: nowrap; /* IMPEDISCE l'andata a capo */
-        display: flex;
-        justify-content: space-between; /* Distribuisce le lettere/parole */
-        width: 100%;
-        overflow: hidden; /* Sicurezza per evitare scroll orizzontale */
-        letter-spacing: -0.02em; /* Opzionale: stringe leggermente per far stare tutto */
-    }
- 
+    
+    
 /* SPAWN IMMAGINI*/    
   
 #image-spawn-container {
@@ -381,16 +364,22 @@ nav a:hover, .lang-switch:hover {
 
 .spawned-img {
     position: absolute;
-    width: 240px; /* Leggermente più grandi per bilanciare la mancanza di rotazione */
+    width: 240px;
     height: auto;
     filter: grayscale(100%);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     opacity: 0;
-    /* Transizione brevissima per eliminare il ritardo (lag) */
     transition: transform 0.05s linear, opacity 0.1s linear; 
     will-change: transform;
+    pointer-events: none; /* Evita che le immagini blocchino i tocchi successivi */
+}
+
+@media screen and (max-width: 768px) {
+    .spawned-img {
+        width: 160px; /* Più piccole su mobile per non coprire tutto */
+    }
 }
 
 /* Layout About Me */
@@ -454,30 +443,6 @@ nav a:hover, .lang-switch:hover {
 .trigger-word {
     font-weight: 700;
     color: var(--secondary); /* Resta arancione ma più marcato */
-}
-
-/* Container dell'immagine che compare */
-#hover-preview-container {
-    position: fixed;
-    width: 200px; /* Regola la grandezza della preview */
-    height: auto;
-    pointer-events: none;
-    z-index: 9999;
-    display: none;
-    border-radius: 2px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    transform: translate(-50%, -50%);
-    background: transparent;
-    line-height: 0; /* Toglie spazi vuoti che possono causare icone fantasma */
-    font-size: 0;
-}
-
-#hover-preview-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: grayscale(100%); /* B&N per coerenza col tuo stile */
 }
 
 /* Titoli sezioni: viola e a sinistra */

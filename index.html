@@ -82,29 +82,44 @@ const imagesList = [
 let activeImages = [];
 let scrollPosition = 0;
 let imgIndex = 0;
-
-// Aumentato a 250px per evitare che si sovrappongano troppo
 const pixelsPerSpawn = 250; 
 let lastSpawnPoint = 0;
+let lastTouchY = 0; // Per calcolare lo scroll su mobile
 
-window.addEventListener('wheel', (e) => {
-    scrollPosition += e.deltaY;
+// FUNZIONE UNIFICATA DI GESTIONE SCROLL
+function handleUniversalScroll(deltaY) {
+    scrollPosition += deltaY;
     
-    // Genera immagine solo ogni 250px di scroll
     if (Math.abs(scrollPosition - lastSpawnPoint) > pixelsPerSpawn) {
         spawnImageAtCenter();
         lastSpawnPoint = scrollPosition;
     }
-
     updateImagesPosition();
+}
+
+// Desktop: rotella del mouse
+window.addEventListener('wheel', (e) => {
+    handleUniversalScroll(e.deltaY);
 });
+
+// Mobile: movimento del dito
+window.addEventListener('touchstart', (e) => {
+    lastTouchY = e.touches[0].clientY;
+}, {passive: true});
+
+window.addEventListener('touchmove', (e) => {
+    const touchY = e.touches[0].clientY;
+    const deltaY = (lastTouchY - touchY) * 2; // Moltiplicatore per simulare la wheel
+    lastTouchY = touchY;
+    
+    handleUniversalScroll(deltaY);
+}, {passive: true});
 
 function spawnImageAtCenter() {
     const imgElement = document.createElement('img');
     imgElement.src = imagesList[imgIndex];
     imgElement.className = 'spawned-img';
     
-    // Direzione casuale ma SENZA rotazione del frame
     const angle = Math.random() * Math.PI * 2;
     
     const imgObj = {
@@ -115,10 +130,8 @@ function spawnImageAtCenter() {
 
     spawnContainer.appendChild(imgElement);
     activeImages.push(imgObj);
-    
     imgIndex = (imgIndex + 1) % imagesList.length;
 
-    // Teniamo al massimo 15 immagini a schermo per pulizia estrema
     if (activeImages.length > 15) {
         const old = activeImages.shift();
         old.element.remove();
@@ -127,20 +140,18 @@ function spawnImageAtCenter() {
 
 function updateImagesPosition() {
     activeImages.forEach((img) => {
-        // Moltiplicatore 0.6 per rendere il movimento più controllato
         const distance = (scrollPosition - img.spawnOffset) * 0.6; 
-        
         const tx = Math.cos(img.angle) * distance;
         const ty = Math.sin(img.angle) * distance;
         
         const scale = Math.min(Math.max(distance / 300, 0), 1);
         const opacity = Math.min(Math.max(distance / 150, 0), 1);
 
-        // SOLO translate e scale, niente rotate
         img.element.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(${scale})`;
         img.element.style.opacity = opacity;
     });
 }
     </script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
 </body>
 </html>

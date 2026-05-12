@@ -36,7 +36,7 @@
     <p class="item-title"><span class="arrow">→</span> VIDEO</p>
     <div class="vimeo-container" id="vimeo-wrapper">
         <iframe id="vimeo-player" 
-                src="https://vimeo.com/1191558082?share=copy&fl=sv&fe=ci" 
+                src="https://vimeo.com/1191558082" 
                 frameborder="0" 
                 allow="autoplay; fullscreen" 
                 allowfullscreen>
@@ -94,7 +94,24 @@
         </div>
     </aside>
 </main>
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-left">
+            <p class="footer-label">Get in touch</p>
+            <a href="mailto:tuamail@esempio.it" class="footer-email">viola.gatti@mail.polimi.com</a>
+        </div>
+        <div class="footer-right">
+            <div class="social-links">
+                <a href="#">LinkedIn</a>
+                <a href="#">Instagram</a>
+                <a href="#">Behance</a>
+            </div>
+            <p class="copyright">© 2026 Viola Gatti</p>
+        </div>
+    </div>
+</footer>
 
+    <script src="https://player.vimeo.com/api/player.js"></script>
     <script>
         const cursor = document.getElementById('cursor-effect');
         document.addEventListener('mousemove', (e) => {
@@ -125,6 +142,24 @@ function togglePlay() {
         video.pause();
     }
 }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const iframe = document.querySelector('#vimeo-player');
+        const wrapper = document.querySelector('#vimeo-wrapper');
+        
+        if (iframe && wrapper) {
+            const player = new Vimeo.Player(iframe);
+
+            player.on('play', function() {
+                wrapper.classList.add('is-playing');
+            });
+
+            player.on('pause', function() {
+                wrapper.classList.remove('is-playing');
+            });
+        }
+    });
+
     </script>
 </body>
 </html>
