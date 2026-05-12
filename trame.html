@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trame | Viola Gatti</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/uncut-sans" rel="stylesheet">
+</head>
+<body class="body-project-detail">
+
+    <div id="cursor-effect"></div>
+
+      <header>
+    <div class="header-content">
+        <a href="index.html" class="logo" style="text-decoration: none;">VG</a>
+        
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav id="nav-menu">
+            <a href="about.html">about me</a>
+            <a href="projects.html">projects</a>
+            <a href="#contacts">contacts</a>
+            <span class="lang-switch">IT | EN</span>
+        </nav>
+    </div>
+    </header>
+   <main class="project-detail-container">
+    <!-- COLONNA 1: GALLERY (Scorre) -->
+    <section class="col-gallery">
+        
+        <div class="gallery-item">
+            <p class="item-title"><span class="arrow">→</span> ISSUES</p>
+            <img src="links/copertineimpilate2.jpg" alt="">
+            <p class="item-caption">Trame is a semi-annual magazine that chronicles the hybrid spaces found in Italian cities. Specifically, each Issue, delves into the spaces found in a specific city. Issue number 0 is the one that deals with Milan and then continues with Turin, Palermo and Venice.</p>
+        </div>
+
+        <div class="gallery-item">
+            <p class="item-title"><span class="arrow">→</span> CONTENTS</p>
+              <div class="image-row centered-row">
+                    <img src="links/P5270227.jpg" alt="">
+                    <img src="links/P5270304.jpg" alt="">
+                </div>  
+                <img src="links/P5270255.jpg" alt="">
+               
+            <p class="item-caption">The first issue is about Milan, a city chosen for the many socio-cultural realities it hosts and the fervent need to make them known. In such a dispersed city, the urgency of connecting and linking hybrid spaces emerges clearly. The magazine is divided internally into five sections: an initial introductory, one on the kind of spaces addressed, one on the specific city, one on places understood as physical spaces followed by an in-depth look at cultural activities, and finally an excursus on networking.</p>
+        </div>
+
+
+            <div class="gallery-item">
+            <p class="item-title"><span class="arrow">→</span> TRAME TALKS</p>
+           <div class="image-row centered-row">
+                    <img src="links/trametalks1.png" alt="">
+                    <img src="links/trametalks2.png" alt="">
+            </div> 
+            <p class="item-caption">The Trame narrative continues with TrameTalks, a website featuring podcasts and in-depth thematic content. This platform explores social and cultural themes through the voices of prominent figures in the urban socio-cultural landscape. It is open to public listening, offering the opportunity to participate actively in the debate by sharing personal opinions, experiences, and contributions.</p>
+        </div>
+
+<div class="gallery-item">
+    <p class="item-title"><span class="arrow">→</span> VIDEO</p>
+    <div class="vimeo-container" id="vimeo-wrapper">
+        <iframe id="vimeo-player" 
+                src="https://player.vimeo.com/video/910384481?autoplay=0&muted=0&controls=1" 
+                frameborder="0" 
+                allow="autoplay; fullscreen" 
+                allowfullscreen>
+        </iframe>
+    </div>
+    <p class="item-caption">launching video for trame magazine..</p>
+</div>
+
+    </section>
+
+    <!-- COLONNA 2: INFO (Bloccata) -->
+    <aside class="col-sidebar">
+        <div class="sidebar-top">
+            <h1 class="project-title">TRAME</h1>
+            <p class="project-subtitle">politiche culturali urbane</p>
+
+        </div>
+
+        <div class="sidebar-bottom">
+            <div class="divider-line"></div>
+            <div class="meta-data">
+                <p>YEAR: <span>2023</span></p>
+                <p>TOOLS: <span>Adobe Indesign, Adobe Lightroom, Adobe Illustrator</span></p>
+                <p>CATEGORY: <span>Editorial design</span></p>
+            </div>
+            <div class="divider-line"></div>
+            <p class="description-text">
+              Trame is an independent magazine that chronicles those cultural and social places that really make the citizens feel part of something. Some of these trame are born quietly, others are bursting forth. What they have in common is an ability to make active politics. Trame’s goal is to create a collaborative network among these hybrid cultural realities, fostering their dialogue with institutions and shaping increasingly inclusive environments where everyone can feel represented and heard.
+            </p>
+        </div>
+    </aside>
+</main>
+
+    <script>
+        const cursor = document.getElementById('cursor-effect');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+          const burger = document.getElementById('burger');
+        const nav = document.getElementById('nav-menu');
+
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            burger.classList.toggle('active'); // Fa incrociare le linee e le colora di arancione
+        });
+
+        // Chiudi il menu quando clicchi un link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                burger.classList.remove('active');
+            });
+        });
+        
+function togglePlay() {
+    const video = document.getElementById("guerrillavideo");
+    if (video.paused) {
+        video.play();
+    } else {
+        video.pause();
+    }
+}
+
+    const iframe = document.querySelector('#vimeo-player');
+    const wrapper = document.querySelector('#vimeo-wrapper');
+    const player = new Vimeo.Player(iframe);
+
+    // Quando il video parte, aggiunge la classe per il colore fisso
+    player.on('play', function() {
+        wrapper.classList.add('is-playing');
+    });
+
+    // Opzionale: se vuoi che torni grigio quando va in pausa
+    player.on('pause', function() {
+        wrapper.classList.remove('is-playing');
+    });
+
+    </script>
+</body>
+</html>

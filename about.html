@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Viola Gatti</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/uncut-sans" rel="stylesheet">
+</head>
+<body>
+
+    <div id="cursor-effect"></div>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo" style="text-decoration: none;">VG</a>
+            <nav>
+                <a href="about.html">about me</a>
+                <a href="index.html#projects">projects</a>
+                <a href="index.html#contacts">contacts</a>
+                <span class="lang-switch">IT | EN</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="about-container">
+    <!-- Colonna 1: Immagine fissa (Larghezza aumentata) -->
+    <div class="col-image">
+        <img src="links/IMG-26marzo.jpg" alt="Viola Gatti" class="fixed-img">
+    </div>
+
+    <!-- Colonna 2: Testo Mono al bottom (Larghezza aumentata) -->
+    <div class="col-info">
+        <div class="info-bottom">
+            <p>I'm a communication designer with a focus on the <span class="trigger-word" data-img="links/tornio.png">material</span> and <span class="trigger-word" data-img="links/DSC_9115-2.jpg">social</span> dimensions of design. Throughout my journey, I have developed a strong sensitivity to materials and solid hands-on skills, allowing me to translate ideas into tangible and well-crafted solutions. I see design as a collaborative process: working in teams, engaging in dialogue, and building relationships based on listening and trust are central to my approach. I bring precision, a practical mindset, and adaptability, contributing to harmonious and productive working environments.</p>
+        </div>
+    </div>
+
+    <!-- Colonna 3: Testo lungo (La più larga, scorrevole) -->
+    <div class="col-text">
+        <div class="scroll-content">
+            
+            <section class="resume-section">
+                <p class="section-title"><span class="arrow">→</span> EDUCATION</p>
+                
+                <div class="resume-item">
+                     <span class="year">2026</span>
+                         <p class="details">
+                             Politecnico di Milano<br>
+                     <span style="font-weight: 400;">MA in Communication Design</span>
+                         </p>
+                </div>
+
+                <div class="resume-item">
+                     <span class="year">2024</span>
+                         <p class="details">
+                             Universidade de Lisboa, Faculdade de Arquitetura<br>
+                     <span style="font-weight: 400;">Erasmus</span>
+                         </p>
+                </div>
+
+                <div class="resume-item">
+                     <span class="year">2022</span>
+                         <p class="details">
+                             Politecnico di Milano<br>
+                     <span style="font-weight: 400;">BA in Communication Design</span>
+                         </p>
+                </div>
+            </section>
+
+            <section class="resume-section">
+                <p class="section-title"><span class="arrow">→</span> EXPERIENCE</p>
+                
+                <div class="resume-item">
+                     <span class="year">2023</span>
+                         <p class="details">
+                             Politecnico di Milano<br>
+                     <span style="font-weight: 400;">Tutor - Bando 150 ore</span>
+                         </p>
+                </div>
+
+               <div class="resume-item">
+                     <span class="year">2022-2023</span>
+                         <p class="details">
+                             Politecnico di Milano<br>
+                     <span style="font-weight: 400;">Teaching Assistant at Visual Elements of Design Lab</span>
+                         </p>
+                </div>
+
+                <div class="resume-item">
+                     <span class="year">2022</span>
+                         <p class="details">
+                             Politecnico di Milano, DCxW Design Department<br>
+                     <span style="font-weight: 400;">Collaborator in creative workshops “Tracce 0.18”</span>
+                         </p>
+                </div>
+            </section>
+                <a href="links/CV_2026ViolaGatti.pdf" download class="cv-link">
+                    <span>SCARICA IL MIO CV</span> &rarr;
+                </a>
+
+        </div>
+    </div>
+</main>
+</body>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-left">
+            <p class="footer-label">Get in touch</p>
+            <a href="mailto:tuamail@esempio.it" class="footer-email">viola.gatti@example.com</a>
+        </div>
+        <div class="footer-right">
+            <div class="social-links">
+                <a href="#">LinkedIn</a>
+                <a href="#">Instagram</a>
+                <a href="#">Behance</a>
+            </div>
+            <p class="copyright">© 2026 Viola Gatti</p>
+        </div>
+    </div>
+</footer>
+
+<div id="hover-preview-container"></div>
+
+<script>
+     const cursor = document.getElementById('cursor-effect');
+            document.addEventListener('mousemove', (e) => {
+        // Usiamo requestAnimationFrame per prestazioni migliori durante lo scroll
+        requestAnimationFrame(() => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+             });
+         });
+         
+         // --- LOGICA TRIGGER WORDS ---
+const triggers = document.querySelectorAll('.trigger-word');
+const previewContainer = document.getElementById('hover-preview-container');
+const preloadedImages = {};
+
+// Precaricamento
+triggers.forEach(trigger => {
+    const src = trigger.getAttribute('data-img');
+    if (src) {
+        const img = new Image();
+        img.src = src;
+        preloadedImages[src] = img;
+    }
+});
+
+triggers.forEach(trigger => {
+    trigger.addEventListener('mouseenter', () => {
+        const imgSrc = trigger.getAttribute('data-img');
+        
+        if (preloadedImages[imgSrc]) {
+            while (previewContainer.firstChild) {
+                previewContainer.removeChild(previewContainer.firstChild);
+            }
+            
+            // Aggiungiamo l'immagine
+            previewContainer.appendChild(preloadedImages[imgSrc]);
+            previewContainer.style.display = 'block';
+        }
+    });
+
+    trigger.addEventListener('mousemove', (e) => {
+        requestAnimationFrame(() => {
+            // Posizionamento rispetto al cursore
+            previewContainer.style.left = (e.clientX + 20) + 'px';
+            previewContainer.style.top = (e.clientY - 150) + 'px';
+        });
+    });
+
+    trigger.addEventListener('mouseleave', () => {
+        previewContainer.style.display = 'none';
+        previewContainer.innerHTML = '';
+    });
+}); // Qui si chiude correttamente il forEach
+</script>

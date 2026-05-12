@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baalcao | Viola Gatti</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/uncut-sans" rel="stylesheet">
+</head>
+<body class="body-project-detail">
+
+    <div id="cursor-effect"></div>
+
+      <header>
+    <div class="header-content">
+        <a href="index.html" class="logo" style="text-decoration: none;">VG</a>
+        
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav id="nav-menu">
+            <a href="about.html">about me</a>
+            <a href="projects.html">projects</a>
+            <a href="#contacts">contacts</a>
+            <span class="lang-switch">IT | EN</span>
+        </nav>
+    </div>
+    </header>
+   <main class="project-detail-container">
+    <!-- COLONNA 1: GALLERY (Scorre) -->
+    <section class="col-gallery">
+        
+        <div class="gallery-item">
+            <p class="item-title"><span class="arrow">→</span> BRAND IDENTITY</p>
+            <img src="links/IMG_9268.JPG" alt="">
+            <img src="links/IMG_8747.JPG" alt="">
+            <img src="links/IMG_8901.JPG" alt="">
+            <img src="links/IMG_8835.JPG" alt="">
+            <p class="item-caption">The identity of Baalcao is rooted in the concepts of handmade tradition, shared memories, and the authenticity of local Portuguese products. Our design process evolved from manual sketches into a refined custom typeface inspired by the calçada, creating a visual connection between community and heritage.</p>
+        </div>
+
+        <div class="gallery-item">
+            <p class="item-title"><span class="arrow">→</span> POSTER CAMPAIGN</p>
+            <img src="links/IMG_8963.png" alt="">
+            <img src="links/MUPI01.png" alt="">
+            <p class="item-caption">The Zonzo mobile app works as a collector of activities. The map function highlights the places that have already been reappropriated by the actions of young people as skating, dancing, writing poems or drawing murales. The feed shows gifs or audio tracks of the other zonzers. Each Zonzer can personalize its personal profile. The Activity section is collection of notions and curiosities about the differnt activities.</p>
+        </div>
+
+        <div class="gallery-item">
+            <p class="item-title"><span class="arrow">→</span> MERCHANDISING</p>
+        <div class="image-row">
+            <img src="links/magliepomi.png" alt="">
+            <img src="links/IMG_9198.JPG" alt="">
+            <img src="links/Tote_Bag_Mockup_1.png" alt="">
+    
+        </div>   
+            <p class="item-caption"> "A Loja da Avó" extends the brand's reach through merchandising like tote bags and apparel that carry the Baalcao identity into the city of Lisbon. The collection, featuring collectible recipe postcards and nostalgic magnets, transforms everyday objects into vessels for Portuguese tradition and shared memories.</p>
+        </div>
+
+    </section>
+
+    <!-- COLONNA 2: INFO (Bloccata) -->
+    <aside class="col-sidebar">
+        <div class="sidebar-top">
+            <h1 class="project-title">BAALCAO</h1>
+            <p class="project-subtitle">comida da avò</p>
+
+        </div>
+
+        <div class="sidebar-bottom">
+            <div class="divider-line"></div>
+            <div class="meta-data">
+                <p>YEAR: <span>2024</span></p>
+                <p>TOOLS: <span>Adobe Illustrator, Adobe Photoshop, Adobe InDesign, Adobe Premiere </span></p>
+                <p>CATEGORY: <span>Welfare Design, Brand Design</span></p>
+            </div>
+            <div class="divider-line"></div>
+            <p class="description-text">
+               Baalcao is an initiative launched at the University of Lisbon to combat food desertification in the 2 de Maio neighborhood. The project was born from the sharing of memories and food traditions of the neighborhood’s inhabitants through a co-design process. It stands out as a meeting place for students and locals where healthy, alternative meals are distributed, using locally grown produce whenever possible, emphasizing the importance of freshness and seasonality.
+
+            </p>
+        </div>
+    </aside>
+</main>
+
+    <script>
+        const cursor = document.getElementById('cursor-effect');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+          const burger = document.getElementById('burger');
+        const nav = document.getElementById('nav-menu');
+
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            burger.classList.toggle('active'); // Fa incrociare le linee e le colora di arancione
+        });
+
+        // Chiudi il menu quando clicchi un link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                burger.classList.remove('active');
+            });
+        });
+        
+function togglePlay() {
+    const video = document.getElementById("guerrillavideo");
+    if (video.paused) {
+        video.play();
+    } else {
+        video.pause();
+    }
+}
+    </script>
+</body>
+</html>

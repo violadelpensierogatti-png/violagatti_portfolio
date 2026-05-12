@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Viola Gatti</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/uncut-sans" rel="stylesheet">
+</head>
+<body class="body-projects">
+
+    <div id="cursor-effect"></div>
+    <div id="hover-container"></div>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo" style="text-decoration: none;">VG</a>
+            <nav>
+                <a href="about.html">about me</a>
+                <a href="projects.html">projects</a>
+                <a href="index.html#contacts">contacts</a>
+                <span class="lang-switch">IT | EN</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="projects-container">
+        <div class="projects-list">
+            
+            <!-- Ogni riga ha più immagini caricate nel data-images -->
+            <a href="zonzo.html" class="project-item" data-images="links/DSC_1652.jpg, links/postermuro.png, links/homemademockup.jpg, links/DSC_9174-2.jpg">
+                <span class="project-name">ZONZO</span>
+                <span class="project-category">Welfare Design, UI, Editorial Design</span>
+            </a>
+
+            <a href="#" class="project-item" data-images="links/fruttivendolo.png, links/Artboard 1.png, links/guerrilla.png, links/volantini mockup.png">
+                <span class="project-name">SNODO</span>
+                <span class="project-category">Welfare design, UI</span>
+            </a>
+
+            <a href="frattempi.html" class="project-item" data-images="links/guerrilla9.png, links/Montaggio.00_00_00_00.Still001.png, links/IMG_6006.jpg, links/IMG_6012.jpg">
+                <span class="project-name">FRATTEMPI</span>
+                <span class="project-category">Welfare design, Audiovisual storytelling</span>
+            </a>
+
+            <a href="baalcao.html" class="project-item" data-images="links/MUPI01.png, links/IMG_8963.png, links/IMG_9268.jpg, links/magliepomi.png">
+                <span class="project-name">BAALCAO</span>
+                <span class="project-category">Welfare design, Brand design</span>
+            </a>
+
+            <a href="albulabernina.html" class="project-item" data-images="links/mucchin.jpg, links/appbernina1.png, links/artifacts.png, links/35x70NonIstituzionale.png">
+                <span class="project-name">ALBULA BERNINA</span>
+                <span class="project-category">Brand design, Design for Territories</span>
+            </a>
+
+             <a href="trame.html" class="project-item" data-images="links/P5270227.jpg, links/P5270255.jpg, links/copertineimpilate2.jpg, links/P5270304.jpg">
+                <span class="project-name">TRAME</span>
+                <span class="project-category">Editorial design</span>
+            </a>
+
+            <a href="#" class="project-item" data-images="links/guerrilla9.png, links/Montaggio.00_00_00_00.Still001.png, links/IMG_6006.jpg, links/IMG_6012.jpg">
+                <span class="project-name">BUMP</span>
+                <span class="project-category">Brand design, Speculative design</span>
+            </a>
+
+
+            <a href="#" class="project-item" data-images="links/guerrilla9.png, links/Montaggio.00_00_00_00.Still001.png, links/IMG_6006.jpg, links/IMG_6012.jpg">
+                <span class="project-name">IMPRESSIONE</span>
+                <span class="project-category">Editorial design</span>
+            </a>
+
+        </div>
+    </main>
+
+    <script>
+            const hoverContainer = document.getElementById('hover-container');
+        const projectItems = document.querySelectorAll('.project-item');
+        const cursor = document.getElementById('cursor-effect');
+
+        // --- 1. LOGICA DI PRELOADING ---
+        // Creiamo un oggetto per memorizzare le immagini già caricate
+        const preloadedImages = {};
+
+        function preloadProjectImages() {
+            projectItems.forEach(item => {
+                const sources = item.getAttribute('data-images').split(',');
+                const id = item.innerText.trim(); // Usiamo il nome come chiave
+                preloadedImages[id] = [];
+
+                sources.forEach(src => {
+                    const img = new Image(); // Crea oggetto immagine in memoria
+                    img.src = src.trim();
+                    preloadedImages[id].push(img); // Il browser la scarica ora
+                });
+            });
+        }
+
+        // Avviamo il preload al caricamento della pagina
+        window.addEventListener('load', preloadProjectImages);
+
+        // --- 2. MOVIMENTO CURSORE & PARALLAX ---
+        document.addEventListener('mousemove', (e) => {
+            requestAnimationFrame(() => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                const images = document.querySelectorAll('.floating-img');
+                images.forEach((img, i) => {
+                    const ratio = (i + 1) * 0.012; // Parallax leggermente più sottile
+                    const moveX = (window.innerWidth / 2 - e.clientX) * ratio;
+                    const moveY = (window.innerHeight / 2 - e.clientY) * ratio;
+                    img.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px)) rotate(${img.dataset.rotation}deg)`;
+                });
+            });
+        });
+
+        // --- 3. EVENTI HOVER ---
+        projectItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const id = item.innerText.trim();
+                const sources = item.getAttribute('data-images').split(',');
+                hoverContainer.innerHTML = ''; 
+                
+                const rect = item.getBoundingClientRect();
+                const centerY = rect.top + (rect.height / 2);
+                const slotsX = [31, 43, 56, 70];
+
+                sources.forEach((src, index) => {
+                    if (index < slotsX.length) {
+                        const img = document.createElement('img');
+                        img.src = src.trim();
+                        img.className = 'floating-img';
+
+                        const rotation = (index % 2 === 0) ? -4 : 4;
+                        img.dataset.rotation = rotation; // Salviamo la rotazione per il parallax
+
+                        img.style.left = `${slotsX[index]}%`;
+                        img.style.top = `${centerY + (index % 2 === 0 ? -15 : 15)}px`;
+                        
+                        // Applichiamo la trasformazione iniziale
+                        img.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+                        
+                        hoverContainer.appendChild(img);
+                    }
+                });
+
+                hoverContainer.style.opacity = '1';
+            });
+
+            item.addEventListener('mouseleave', () => {
+                hoverContainer.style.opacity = '0';
+            });
+        });
+    </script>
+</body>
+</html>

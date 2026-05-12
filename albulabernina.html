@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlbulaBernina | Viola Gatti</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/uncut-sans" rel="stylesheet">
+</head>
+<body class="body-project-detail">
+
+    <div id="cursor-effect"></div>
+
+      <header>
+    <div class="header-content">
+        <a href="index.html" class="logo" style="text-decoration: none;">VG</a>
+        
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav id="nav-menu">
+            <a href="about.html">about me</a>
+            <a href="projects.html">projects</a>
+            <a href="#contacts">contacts</a>
+            <span class="lang-switch">IT | EN</span>
+        </nav>
+    </div>
+    </header>
+   <main class="project-detail-container">
+    <!-- COLONNA 1: GALLERY (Scorre) -->
+    <section class="col-gallery">
+        
+        <div class="gallery-item">
+            <p class="item-title"><span class="arrow">→</span> BRAND IDENTITY</p>
+            <img src="links/composizione.png" alt="">
+            <img src="links/artifacts copia.jpg" alt="">
+            <p class="item-caption">The UNESCO site's elements inspired a series of 60 pictograms categorized into four themes, each defined by a specific identity color: red for the elements of the railway, green for nature, beige for architecture and blue for activities. These pictograms form geometric patterns used to brand various artifacts, merchandise, and tickets.</p>
+        </div>
+
+        <div class="gallery-item">
+            <p class="item-title"><span class="arrow">→</span> POSTER CAMPAIGN</p>
+            <img src="links/mucchin.jpg" alt="">
+               <div class="image-row centered-row">
+            <img src="links/35x70NonIstituzionale.png" alt="">
+            <img src="links/35x70NonIstituzionale2.png" alt="">
+        </div>  
+            <p class="item-caption">The poster campaign is divided into two distinct series: a formal institutional collection and a playful non-institutional campaign. The institutional series promotes the UNESCO site by highlighting the harmony between man and nature, showcasing the railway as an artificial element that seamlessly integrates into the landscape without altering it. In contrast, the more lively campaign adopts a playful tone to invite tourists of all ages to visit, focusing on the train's renowned slowness as a unique opportunity to fully immerse oneself in the beauty of the surrounding panorama.</p>
+        </div>
+
+
+            <div class="gallery-item">
+            <p class="item-title"><span class="arrow">→</span> MOBILE APP</p>
+            <div class="image-row">
+            <img src="links/appbernina1.png" alt="">
+            <img src="links/appbernina2.png" alt="">
+            <img src="links/appbernina3.png" alt="">
+        </div>  
+            <p class="item-caption">The travel experience is further enhanced by a mobile application designed to assist with both trip planning and the exploration of the territories along the route. In addition to the "Discover the Site's Secrets" and "Plan Your Journey" interfaces, the Albula-Bernina app features a "Control Tools" screen, providing real-time information to users during the train ride or while waiting at the station.</p>
+        </div>
+
+    </section>
+
+    <!-- COLONNA 2: INFO (Bloccata) -->
+    <aside class="col-sidebar">
+        <div class="sidebar-top">
+            <h1 class="project-title">ALBULA BERNINA</h1>
+            <p class="project-subtitle">ferrovia retica UNESCO</p>
+
+        </div>
+
+        <div class="sidebar-bottom">
+            <div class="divider-line"></div>
+            <div class="meta-data">
+                <p>YEAR: <span>2021</span></p>
+                <p>TOOLS: <span>Adobe Illustratore, Adobe Photoshop, Premiere Pro</span></p>
+                <p>CATEGORY: <span>Brand Design, Design for Territories</span></p>
+            </div>
+            <div class="divider-line"></div>
+            <p class="description-text">
+               The project consists in the design of an identity system for the UNESCO site of the Rhaetian Railway in the landscape of Albula and Bernina. The variety of elements that distinguish this landscape and the whole experience is translated into a set of pictograms that are then divided into different patterns which create the dynamic identity of this particular moving site. This feature allows to effectively represent the peculiarity of this site, which is the dynamism.
+
+            </p>
+        </div>
+    </aside>
+</main>
+
+    <script>
+        const cursor = document.getElementById('cursor-effect');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+          const burger = document.getElementById('burger');
+        const nav = document.getElementById('nav-menu');
+
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            burger.classList.toggle('active'); // Fa incrociare le linee e le colora di arancione
+        });
+
+        // Chiudi il menu quando clicchi un link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                burger.classList.remove('active');
+            });
+        });
+        
+function togglePlay() {
+    const video = document.getElementById("guerrillavideo");
+    if (video.paused) {
+        video.play();
+    } else {
+        video.pause();
+    }
+}
+    </script>
+</body>
+</html>

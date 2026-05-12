@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frattempi | Viola Gatti</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/uncut-sans" rel="stylesheet">
+</head>
+<body class="body-project-detail">
+
+    <div id="cursor-effect"></div>
+
+      <header>
+    <div class="header-content">
+        <a href="index.html" class="logo" style="text-decoration: none;">VG</a>
+        
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav id="nav-menu">
+            <a href="about.html">about me</a>
+            <a href="projects.html">projects</a>
+            <a href="#contacts">contacts</a>
+            <span class="lang-switch">IT | EN</span>
+        </nav>
+    </div>
+    </header>
+   <main class="project-detail-container">
+    <!-- COLONNA 1: GALLERY (Scorre) -->
+    <section class="col-gallery">
+        <div class="gallery-item">
+    <p class="item-title"><span class="arrow">→</span> VIDEO</p>
+    <div class="vimeo-container" id="vimeo-wrapper">
+        <iframe id="vimeo-player" 
+                src="https://vimeo.com/1191558082?share=copy&fl=sv&fe=ci" 
+                frameborder="0" 
+                allow="autoplay; fullscreen" 
+                allowfullscreen>
+        </iframe>
+    </div>
+    <p class="item-caption">The visual artifact of Frattempi stages a dialogue between two characters who personify "free time" and "empty time." They represent the perceptions and lived experiences of individuals both inside and outside of prison. Crucially, the narratives, locations, and characters themselves never explicitly reveal whether the condition is one of freedom or detention.</p>
+        </div>
+            
+        
+         <div class="gallery-item">
+            <p class="item-title"><span class="arrow">→</span> POSTER CAMPAIGN</p>
+            <img src="links/IMG_6006.jpg" alt="">
+            <img src="links/IMG_6000.jpg" alt="">
+            <p class="item-caption">The posters are artifacts displayed by Tempo Libero featuring stereotypical phrases about prison, which are then debunked in red. They include a QR code that directs users to the Frattempi landing page, where the video content can be viewed.</p>
+        </div>
+
+        <div class="gallery-item">
+            <p class="item-title"><span class="arrow">→</span> GUERRILLA</p>
+             <video id="guerrillavideo" class="fixed-vid" autoplay loop muted playsinline>
+                 <source src="links/guerrilla copia.mp4" type="video/mp4">
+                    Il tuo browser non supporta il tag video.
+            </video>
+            <p class="item-caption">The guerrilla marketing consists of an intervention by Tempo Vuoto, which disseminates prohibition signs to obstruct the activities of Tempo Libero in Piazza Sant’Agostino, a popular gathering spot near the San Vittore District House.</p>
+        </div>
+
+       
+
+        <div class="gallery-item">
+            <p class="item-title"><span class="arrow">→</span> INSTAGRAM</p>
+        <div class="image-row centered-row">
+            <img src="links/iphone.png" alt="">
+            <img src="links/Group 4.png" alt="">
+        </div>   
+            <p class="item-caption"> The instagram profile <a href="https://www.instagram.com/tempo_vuoto/" target="_blank" class="insta-link">Tempo_vuoto</a> is the personal profile of Tempo Vuoto and functions like a diary, documenting a journey of growing awareness regarding prison conditions. The posts consist of reflections on idleness and the sensation of inertia, alongside stories from inmates, descriptions of objects handcrafted in prison during free hours, and other creative ways detainees find to pass the time.</p>
+        </div>
+    </section>
+
+    <!-- COLONNA 2: INFO (Bloccata) -->
+    <aside class="col-sidebar">
+        <div class="sidebar-top">
+            <h1 class="project-title">FRATTEMPI</h1>
+        </div>
+
+        <div class="sidebar-bottom">
+            <div class="divider-line"></div>
+            <div class="meta-data">
+                <p>YEAR: <span>2023/2024</span></p>
+                <p>TOOLS: <span>Adobe PremierePro, Adobe Photoshop, Figma</span></p>
+                <p>CATEGORY: <span>Welfare Design, Visual Storytelling</span></p>
+            </div>
+            <div class="divider-line"></div>
+            <p class="description-text">
+                Frattempi is a transmedial system that, through the narration of different perceptions of time, encourages awareness of prison and detention conditions, with the aim of generating active involvement. The very concept of time takes on a different dimension in conditions of detention. If, by definition, free time is such because it is voluntary, it's natural to ask how much of it can actually be discussed in prison: this is the place of empty time, stripped of all function, measured by the degree of submission to the barrier. In Frattempi, these two concepts become characters: Free Time and Empty Time. The dialogue between the two triggers their own transformation, a metaphor for the change that must permeate society.
+            </p>
+        </div>
+    </aside>
+</main>
+
+    <script>
+        const cursor = document.getElementById('cursor-effect');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+          const burger = document.getElementById('burger');
+        const nav = document.getElementById('nav-menu');
+
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            burger.classList.toggle('active'); // Fa incrociare le linee e le colora di arancione
+        });
+
+        // Chiudi il menu quando clicchi un link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                burger.classList.remove('active');
+            });
+        });
+        
+function togglePlay() {
+    const video = document.getElementById("guerrillavideo");
+    if (video.paused) {
+        video.play();
+    } else {
+        video.pause();
+    }
+}
+    </script>
+</body>
+</html>

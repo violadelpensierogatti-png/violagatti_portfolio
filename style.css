@@ -1,0 +1,1057 @@
+/* Reset e Variabili */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #EDEDED;
+    --primary: #6E6FDA;
+    --secondary: #FF8B73;
+    --font-main: 'Uncut Sans', sans-serif;
+    --font-menu: 'IBM Plex Sans', sans-serif; 
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: var(--font-main);
+    overflow: hidden;
+    cursor: none;
+}
+body, html {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+}
+
+/* Header */
+header {
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    z-index: 1000;
+}
+
+.header-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: medium;
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+nav a {
+    font-family: var(--font-menu);
+    text-decoration: none;
+    color: var(--primary);
+    margin-left: 30px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    text-transform: lowercase; /* Mantiene about me, projects, contacts minuscoli */
+    transition: color 0.3s ease;
+}
+
+.lang-switch {
+    font-family: var(--font-menu);
+    color: var(--primary);
+    margin-left: 30px;
+    font-size: 0.85rem;
+    font-weight: 500; /* Leggermente più marcato per lo switch */
+    text-transform: uppercase; /* Forza IT | EN in maiuscolo */
+    cursor: pointer;
+}
+
+nav a:hover, .lang-switch:hover {
+    color: var(--secondary);
+}
+
+
+.about-container {
+    width: 100%;
+    background-color: var(--bg-color);
+    padding: 100px 5% 50px 5%;
+    margin-top: 50px;
+}
+
+/*--- FOOTER---*/
+.site-footer {
+    position: relative; /* Lo assicura nel flusso normale */
+    width: 100%;
+    background-color: var(--bg-color);
+    padding: 120px 5% 60px 5%;
+    margin-top: 0; /* Lo attacchiamo alla fine della gallery */
+    z-index: 100; /* Lo portiamo sopra eventuali background */
+    clear: both; /* Rompe eventuali float */
+    display: block !important; /* Forza la visualizzazione */
+}
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.footer-label {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--secondary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.footer-email {
+    font-family: 'Uncut Sans', sans-serif;
+    font-size: 2vw; /* Grande e d'impatto */
+    font-weight: 400;
+    color: var(--primary);
+    text-decoration: none;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.footer-email:hover {
+    color: var(--secondary);
+}
+
+.footer-right {
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: var(--primary);
+    margin-left: 20px;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--secondary);
+}
+
+.copyright {
+    margin-top: 20px;
+    font-size: 0.7rem;
+    color: var(--primary);
+    opacity: 0.6;
+}
+
+/* --- FOOTER ADAPTIVE --- */
+@media screen and (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-email {
+        font-size: 8vw; /* Più leggibile su mobile */
+    }
+
+    .footer-right {
+        margin-top: 50px;
+        text-align: left;
+    }
+
+    .social-links a {
+        margin-left: 0;
+        margin-right: 20px;
+    }
+}
+
+/* Pallino Arancione */
+#cursor-effect {
+    position: fixed;
+    width: 12px; /* Un po' più piccolino è più elegante */
+    height: 12px;
+    background-color: var(--secondary); /* Il tuo arancione */
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    
+    /* Mix-blend-mode tolto: ora è un colore pieno */
+    mix-blend-mode: normal; 
+    
+    /* Transizione leggerissima per rendere il movimento meno "meccanico" */
+    transition: transform 0.05s ease-out;
+}
+
+/* Opzionale: un leggero feedback quando clicchi */
+#cursor-effect:active {
+    transform: translate(-50%, -50%) scale(0.8);
+}
+/* Hero posizionata in fondo */
+.hero {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Spinge tutto in fondo */
+    padding-bottom: 4vh; /* Spazio dal bordo inferiore dello schermo */
+}
+
+.hero-bottom-container {
+    width: 94%; /* Larghezza quasi totale */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-subtitle {
+    color: var(--primary);
+    font-size: 4vw; /* Puoi regolare leggermente se vuoi i caratteri più grandi/piccoli */
+    line-height: 1;
+    text-transform: lowercase;
+    width: 100%; /* Forza la larghezza totale */
+    display: flex;
+    justify-content: space-between; /* Distribuisce il contenuto sul 100% della riga */
+    margin-bottom: 0.5vw;
+}
+
+/* Assicurati che anche il titolo abbia la larghezza piena */
+.hero-title {
+    color: var(--primary);
+    font-size: 15.2vw;
+    line-height: 0.8;
+    white-space: nowrap;
+    width: 100%; /* Forza la larghezza totale */
+    display: flex;
+    justify-content: space-between;
+    text-align: justify;
+    text-align-last: justify; 
+    margin: 0;
+    letter-spacing: -0.02em; /* Opzionale: per un look più compatto e pro */
+}
+
+/* --- BURGER ICON (DUE LINEE) --- */
+.burger {
+    display: none; /* NASCOSTO DI BASE SU DESKTOP */
+    width: 25px;
+    height: 14px;
+    position: relative;
+    cursor: pointer;
+    z-index: 2001;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.burger span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background-color: var(--primary);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Animazione quando il menu è aperto (diventa una X) */
+.burger.active span {
+    background-color: var(--secondary); /* Diventa arancione */
+}
+
+.burger.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.burger.active span:nth-child(2) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media screen and (max-width: 768px) {
+    
+    /* MOSTRA IL BURGER SOLO QUI */
+    .burger {
+        display: flex; 
+    }
+
+  /* NASCONDI LA NAVIGAZIONE STANDARD */
+    nav {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--bg-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 1500;
+    }
+
+    nav.active {
+        left: 0;
+    }
+
+    /* Voci del menu: Massa al centro, ma allineate a SX (bandiera) */
+   nav a, .lang-switch {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 1.8rem;
+        margin: 12px 0;
+        text-decoration: none;
+        color: var(--primary);
+        width: 100%;
+        max-width: 220px; 
+        text-align: left;
+        text-transform: lowercase;
+    }
+
+    .lang-switch {
+        margin-top: 40px;
+        font-size: 1rem;
+        text-transform: uppercase;
+    }
+}
+/* --- DESKTOP NAVIGATION (Reset per sicurezza) --- */
+@media screen and (min-width: 769px) {
+    nav {
+        display: flex !important;
+        position: static;
+        height: auto;
+        width: auto;
+        background: none;
+        flex-direction: row;
+        left: 0;
+    }
+    
+    .burger {
+        display: none !important; /* Forza la sparizione su desktop */
+    }
+}
+   /* Animazione Burger */
+    .burger.toggle span:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 5px);
+    }
+    .burger.toggle span:nth-child(2) {
+        transform: rotate(45deg) translate(-5px, -5px);
+    }
+
+    .hero-bottom-container {
+        width: 94%; /* Manteniamo la stessa proporzione del desktop */
+        margin: 0 auto;
+    }
+    /* --- HERO ADAPTIVE --- */
+    .hero-bottom-container {
+        width: 94%; /* Manteniamo la stessa proporzione del desktop */
+        margin: 0 auto;
+    }
+
+    .hero-subtitle {
+        font-size: 3.5vw; /* Proporzionale per non sovrastare il titolo */
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 1vw;
+    }
+
+    .hero-title {
+        font-size: 15.2vw; /* Stessa dimensione desktop o leggermente regolata */
+        line-height: 0.8;
+        white-space: nowrap; /* IMPEDISCE l'andata a capo */
+        display: flex;
+        justify-content: space-between; /* Distribuisce le lettere/parole */
+        width: 100%;
+        overflow: hidden; /* Sicurezza per evitare scroll orizzontale */
+        letter-spacing: -0.02em; /* Opzionale: stringe leggermente per far stare tutto */
+    }
+ 
+/* SPAWN IMMAGINI*/    
+  
+#image-spawn-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.spawned-img {
+    position: absolute;
+    width: 240px; /* Leggermente più grandi per bilanciare la mancanza di rotazione */
+    height: auto;
+    filter: grayscale(100%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    /* Transizione brevissima per eliminare il ritardo (lag) */
+    transition: transform 0.05s linear, opacity 0.1s linear; 
+    will-change: transform;
+}
+
+/* Layout About Me */
+
+.about-container {
+    padding-top: 60px;
+    height: 100vh;
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    align-items: flex-start;
+}
+
+/* Colonna 1: Immagine */
+.col-image {
+    width: 30%;
+    height: calc(100vh - 70px);
+    padding: 30px 20px 60px 40px; /* Padding destro ridotto (Gutter) */
+    display: flex;
+    align-items: flex-start;
+}
+
+.fixed-img {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain; /* Assicura che la foto sia visibile interamente */
+    -webkit-filter: grayscale(100%); /* Supporto per Safari/Chrome vecchi */
+    filter: grayscale(100%);
+   transition: filter 0.5s ease;
+}
+
+/* Stato al passaggio del mouse: Torna a colori */
+.fixed-img:hover {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+}
+
+/* Colonna 2: Info Mono */
+.col-info {
+    width: 25%;
+    height: calc(100vh - 70px);
+    padding: 60px 20px; /* Gutter bilanciato ai lati */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* Colonna 3: Testo bio */
+.col-text {
+    width: 45%;
+    height: calc(100vh - 70px);
+    padding: 20vh 40px 60px 20px; /* Padding sinistro ridotto (Gutter) */
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.col-text::-webkit-scrollbar {
+    display: none;
+}
+/* Stile per le parole trigger */
+.trigger-word {
+    font-weight: 700;
+    color: var(--secondary); /* Resta arancione ma più marcato */
+}
+
+/* Container dell'immagine che compare */
+#hover-preview-container {
+    position: fixed;
+    width: 200px; /* Regola la grandezza della preview */
+    height: auto;
+    pointer-events: none;
+    z-index: 9999;
+    display: none;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transform: translate(-50%, -50%);
+    background: transparent;
+    line-height: 0; /* Toglie spazi vuoti che possono causare icone fantasma */
+    font-size: 0;
+}
+
+#hover-preview-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(100%); /* B&N per coerenza col tuo stile */
+}
+
+/* Titoli sezioni: viola e a sinistra */
+.section-title {
+    font-family: var(--font-main);
+    color: var(--primary); /* Viola #6E6FDA */
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    letter-spacing: 0.05em;
+}
+
+/* Contenitore dei testi: tutto viola e sfalsato a destra */
+.resume-item {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--primary);
+    margin-bottom: 45px;
+    font-size: 1rem;
+    line-height: 1.4;
+    padding-left: 55px; 
+}
+
+/* Anno: Bold e staccato */
+.year {
+    display: block;
+    margin-bottom: 15px; 
+    font-weight: 700; /* Bold deciso */
+}
+
+/* Nome Istituto e dettagli: Bold solo sulla prima riga/istituto */
+.details {
+    color: var(--primary);
+    font-weight: 700; /* Rende tutto il blocco grassetto */
+}
+
+/* Se vuoi che solo il nome dell'istituto sia bold e il resto (es. MA in Design) sia regular,
+   possiamo fare così nel CSS: */
+.details br + span, 
+.details em {
+    font-weight: 400; /* Questo servirebbe se volessi differenziare dentro il blocco */
+}
+
+.info-bottom p {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+.cv-link {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--secondary); /* Arancione */
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-top: 60px;
+    margin-bottom: 80px;
+    padding-left: 40px;
+    text-decoration: none; /* Rimuove ogni sottolineatura di default */
+    transition: all 0.3s ease;
+}
+
+/* Questa è la riga sotto la scritta */
+.cv-link span {
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 2px;
+}
+
+.cv-link:hover {
+    opacity: 0.7;
+    transform: translateX(10px); /* Sposta tutto il blocco leggermente a destra */
+}
+/* --- Pagina Projects --- */
+
+.body-projects {
+    background-color: #ededed !important;
+    overflow-y: auto !important;
+    cursor: none;
+}
+
+.projects-container {
+    padding-top: 140px;
+    padding-bottom: 100px;
+    background-color: #ededed;
+}
+
+.projects-list {
+   width: 90%;
+    margin: 0 auto;
+    border-top: 1px solid var(--primary);
+    position: relative;
+    z-index: 1;
+}
+
+.project-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0; /* Un po' più compatto */
+    text-decoration: none;
+    border-bottom: 1px solid var(--primary);
+    position: relative;
+    z-index: auto;
+}
+
+.project-item:hover .project-name,
+.project-item:hover .project-category {
+    color: var(--secondary); /* Diventa arancione */
+}
+
+.project-name, 
+.project-category {
+    transition: color 0.3s ease;
+    pointer-events: none; /* Evita che il mouse "inciampi" sul testo durante lo scroll */
+}
+
+.project-name {
+    font-family: var(--font-main);
+    font-size: 2.8rem;
+    color: var(--primary);
+    text-transform: uppercase;
+    width: 35%; /* Occupa la parte sinistra */
+}
+
+.project-category {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--primary);
+    width: 35%; /* Occupa la parte destra */
+    text-align: right;
+}
+
+/* --- Container Foto: Fascia Centrale --- */
+#hover-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999; 
+    opacity: 0;
+    /* La transizione solo sull'opacity rende l'ingresso fluido ma istantaneo */
+    transition: opacity 0.15s ease-in-out;
+}
+
+.floating-img {
+    position: absolute;
+    width: 180px; /* Leggermente più grandi */
+    height: auto;
+    border-radius: 2px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    will-change: transform; /* Ottimizza il rendering della GPU */
+    /* Rimuoviamo transition: transform per evitare lag nel movimento col mouse */
+}
+@media screen and (max-width: 768px) {
+    #hover-container {
+        display: none;
+    }
+}
+
+/* --- zonzo --- */
+
+/* --- Fix Globali per lo Scroll --- */
+.project-detail-container {
+    padding-top: 80px; /* Spazio per l'header */
+    height: 100vh;
+    display: flex;
+    width: 100%;
+    overflow: hidden; /* Blocca lo scroll globale */
+    background-color: #ededed;
+}
+
+/* Colonna Gallery: SCORRE */
+.col-gallery {
+    width: 65%;
+    height: calc(100vh - 80px);
+    padding: 25px 1vw 2vw 3vw;
+    overflow-y: auto; /* Solo questa colonna scorre */
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    scrollbar-width: none; /* Nasconde scrollbar Firefox */
+}
+
+.col-gallery::-webkit-scrollbar {
+    display: none; /* Nasconde scrollbar Chrome/Safari */
+}
+
+.fixed-vid {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+    filter: none;
+    -webkit-filter: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.fixed-vid:hover {
+    filter: none;
+    transform: none;
+}
+
+/* Colonna Sidebar: FERMA */
+.col-sidebar {
+    width: 35%;
+    height: calc(100vh - 80px);
+    padding: 25px 3vw 2vw 1vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Titolo su, descrizione giù */
+    background-color: #ededed;
+}
+
+/* --- Stilizzazione Testi --- */
+
+.project-title {
+    font-family: var(--font-main);
+    font-size: 2rem;
+    color: var(--primary);
+    border-bottom: 1.5px solid var(--primary);
+    padding-bottom: 13px;
+    width: 100%;
+    margin: 0;
+}
+
+.project-subtitle {
+    font-family: var(--font-main);
+    font-size: 1.5rem;
+    color: var(--primary);
+    text-transform: lowercase; /* Minuscolo */
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.divider-line {
+    width: 100%;
+    height: 1.5px;
+    background-color: #6e6fda;
+    margin: 15px 0;
+}
+
+.meta-data {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--secondary);
+    text-transform: uppercase;
+    line-height: 1.6;
+}
+
+.description-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    color: #6e6fda;
+    line-height: 1.5;
+    margin-top: 20px;
+}
+
+/* --- Stilizzazione Gallery --- */
+
+.item-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.2rem;
+    color: #6e6fda;
+    margin-bottom: 10px;
+}
+
+.arrow { 
+    color: #ff7e5f; 
+    margin-right: 8px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+}
+
+.gallery-item img:hover { filter: grayscale(0%); }
+
+.item-caption {
+    font-family: 'IBM Plex Mono', monospace;
+    color: #ff7e5f;
+    font-size: 0.75rem;
+    margin-top: 8px;
+    line-height: 1.4;
+}
+.insta-link {
+    color: #ff7e5f; /* Il tuo arancione */
+    text-decoration: underline; /* Rimuove la sottolineatura brutta di default */
+    font-weight: 700; /* Lo rende un po' più evidente */
+    border-bottom: 1px solid transparent; /* Prepariamo la linea per l'hover */
+    transition: all 0.3s ease;
+}
+
+.insta-link:hover {
+    border-bottom: 1px solid #ff7e5f; /* La sottolineatura appare solo al passaggio del mouse */
+    opacity: 0.8;
+}
+
+/* Contenitore per le tre immagini */
+.image-row {
+    display: flex;
+    flex-direction: row; /* Le mette in riga */
+    gap: 15px;           /* Spazio tra le immagini */
+    width: 100%;
+    justify-content: center;
+}
+
+/* Regola specifica per le immagini dentro la riga */
+.image-row img {
+    width: calc(33.33% - 10px); /* Divide lo spazio in 3 parti uguali */
+    height: auto;
+    object-fit: contain;        /* Mantiene le proporzioni originali */
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+}
+
+.centered-row {
+    justify-content: center;
+    gap: 40px; 
+    width: 100%;
+    margin: 30px 0;
+}
+
+centered-row img {
+    width: calc(33.33% - 10px); 
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+}
+
+.centered-row img:hover {
+    filter: grayscale(0%);
+
+}
+/* L'hover continua a funzionare come per le altre */
+.image-row img:hover {
+    filter: grayscale(0%);
+}
+
+
+#appzonzo {
+    display: flex;
+    flex-direction: row;
+    /* Aumenta questo valore per dare più o meno spazio (padding) tra le immagini */
+    gap: 42px; 
+    width: 100%;
+    /* Spazio extra sopra e sotto il blocco se necessario */
+    padding: 40px 5%;
+}
+
+#appzonzo img {
+    /* Usiamo calc per sottrarre lo spazio del gap e avere 3 colonne perfette */
+    width: calc(33.33% - 27px); 
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+}
+
+#appzonzo img:hover {
+    filter: grayscale(0%);
+}
+
+/* --- CLASSE GIF UNIVERSALE --- */
+.css-gif {
+    position: relative;
+    width: 100%;
+    line-height: 0; /* Rimuove spazi bianchi indesiderati sotto l'immagine */
+}
+
+.css-gif img {
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+    /* Animazione: 8 secondi totale, infinita */
+    animation: gifLikeAnimation 8s infinite;
+    opacity: 0;
+}
+
+/* Sovrapponiamo tutte le immagini tranne la prima */
+.css-gif img:not(:first-child) {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* La prima immagine NON è absolute così da dare l'altezza corretta al contenitore */
+.css-gif img:first-child {
+    position: relative;
+}
+
+/* Ritardi (Delay) per ogni immagine */
+.css-gif img:nth-child(1) { animation-delay: 0s; }
+.css-gif img:nth-child(2) { animation-delay: 2s; }
+.css-gif img:nth-child(3) { animation-delay: 4s; }
+.css-gif img:nth-child(4) { animation-delay: 6s; }
+.css-gif img:nth-child(5) { animation-delay: 8s; }
+.css-gif img:nth-child(6) { animation-delay: 10s; }
+.css-gif img:nth-child(7) { animation-delay: 12s; }
+
+/* L'animazione: appare, resta visibile, scompare */
+@keyframes gifLikeAnimation {
+    0%   { opacity: 0; }
+    5%   { opacity: 1; } /* Entrata veloce */
+    25%  { opacity: 1; } /* Resta visibile */
+    30%  { opacity: 0; } /* Scompare */
+    100% { opacity: 0; } /* Resta invisibile fino al prossimo ciclo */
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+    .project-detail-container {
+        height: auto;
+        flex-direction: column-reverse;
+        overflow: visible;
+    }
+    .col-gallery, .col-sidebar {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        padding: 40px 5%;
+    }
+    .image-row {
+        flex-direction: column; /* Su mobile tornano una sotto l'altra */
+        gap: 20px;
+    }
+    
+    .image-row img {
+        width: 100%; /* Tornano a larghezza piena */
+    }
+    #appzonzo {
+        flex-direction: column;
+        gap: 30px;
+    }
+    #appzonzo img {
+        width: 100%;
+    }
+}
+
+.vimeo-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Ratio 16:9 */
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    background-color: #000; /* Sfondo nero mentre carica */
+}
+
+.vimeo-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Il filtro si applica al video */
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+}
+
+.vimeo-container:hover iframe {
+    filter: grayscale(0%);
+}
+/* Quando il video ha la classe 'is-playing', rimuoviamo il grayscale */
+.vimeo-container.is-playing iframe {
+    filter: grayscale(0%) !important;
+}
+
+/* Mantieni il resto del tuo CSS per l'hover */
+.vimeo-container iframe {
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+}
+
+.vimeo-container:hover iframe {
+    filter: grayscale(0%);
+}
+
+/* --- Progetti Correlati --- */
+.related-projects {
+    width: 100%;
+    border-top: 1px solid var(--primary);
+    margin-top: 60px;
+    padding-top: 20px;
+}
+
+.related-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+    text-decoration: none;
+    color: var(--primary);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.related-item:hover {
+    color: var(--secondary); /* Diventa arancione al passaggio */
+}
+
+.rel-cat {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* --- Fix Mobile --- */
+@media screen and (max-width: 768px) {
+    .project-detail-container {
+        flex-direction: column-reverse; /* Testo sopra, immagini sotto su mobile */
+        padding: 80px 20px;
+    }
+    .project-sidebar, .project-gallery-grid {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+        padding-right: 0;
+    }
+}
+
+/* --- ADAPTIVE / MOBILE --- */
+
+@media screen and (max-width: 768px) {
+    .project-detail-container {
+        flex-direction: column;
+    }
+
+    .project-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+        padding: 40px 5%;
+    }
+
+    .project-gallery-grid {
+        width: 100%;
+        padding: 20px 5%;
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .sidebar-content {
+        height: auto;
+        display: block;
+    }
+
+    .project-detail-title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+
+    .grid-item.w-50, .grid-item.w-100 {
+        grid-column: span 1;
+    }
+
+    .grid-item.offset-top {
+        margin-top: 0;
+    }
+
+    .orange-caption {
+        width: 100%; /* Su mobile occupa tutto e si allinea a sx */
+        text-align: left;
+    }
+}
+

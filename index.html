@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viola Gatti | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.cdnfonts.com/css/uncut-sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/uncut-sans" rel="stylesheet">
+</head>
+<body>
+
+    <div id="cursor-effect"></div>
+
+    <header>
+    <div class="header-content">
+        <a href="index.html" class="logo" style="text-decoration: none;">VG</a>
+        
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav id="nav-menu">
+            <a href="about.html">about me</a>
+            <a href="projects.html">projects</a>
+            <a href="#contacts">contacts</a>
+            <span class="lang-switch">IT | EN</span>
+        </nav>
+    </div>
+</header>
+    <div id="image-spawn-container"></div>
+    <main class="hero">
+        <div class="hero-bottom-container">
+            <!-- Scritta piccola sopra -->
+            <p class="hero-subtitle">
+                <span>communication</span> 
+                <span>design</span> 
+                 <span>portfolio</span>
+            </p>
+            <!-- Scritta grande sotto -->
+            <h1 class="hero-title"><span>VIOLA</span> <span>GATTI</span></h1>
+        </div>
+    </main>
+
+    <script>
+         const cursor = document.getElementById('cursor-effect');
+            document.addEventListener('mousemove', (e) => {
+        // Usiamo requestAnimationFrame per prestazioni migliori durante lo scroll
+        requestAnimationFrame(() => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+             });
+         });
+         const burger = document.getElementById('burger');
+        const nav = document.getElementById('nav-menu');
+
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            burger.classList.toggle('active'); // Fa incrociare le linee e le colora di arancione
+        });
+
+        // Chiudi il menu quando clicchi un link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                burger.classList.remove('active');
+            });
+        });
+
+        // Situa delle immagini landing page
+   
+const spawnContainer = document.getElementById('image-spawn-container');
+const imagesList = [
+    'links/dumbo.jpg',
+    'links/guerrilla.png',
+    'links/costa copta.jpg',
+    'links/GattiViola_cartaz.pdf'
+];
+
+let activeImages = [];
+let scrollPosition = 0;
+let imgIndex = 0;
+
+// Aumentato a 250px per evitare che si sovrappongano troppo
+const pixelsPerSpawn = 250; 
+let lastSpawnPoint = 0;
+
+window.addEventListener('wheel', (e) => {
+    scrollPosition += e.deltaY;
+    
+    // Genera immagine solo ogni 250px di scroll
+    if (Math.abs(scrollPosition - lastSpawnPoint) > pixelsPerSpawn) {
+        spawnImageAtCenter();
+        lastSpawnPoint = scrollPosition;
+    }
+
+    updateImagesPosition();
+});
+
+function spawnImageAtCenter() {
+    const imgElement = document.createElement('img');
+    imgElement.src = imagesList[imgIndex];
+    imgElement.className = 'spawned-img';
+    
+    // Direzione casuale ma SENZA rotazione del frame
+    const angle = Math.random() * Math.PI * 2;
+    
+    const imgObj = {
+        element: imgElement,
+        angle: angle,
+        spawnOffset: scrollPosition 
+    };
+
+    spawnContainer.appendChild(imgElement);
+    activeImages.push(imgObj);
+    
+    imgIndex = (imgIndex + 1) % imagesList.length;
+
+    // Teniamo al massimo 15 immagini a schermo per pulizia estrema
+    if (activeImages.length > 15) {
+        const old = activeImages.shift();
+        old.element.remove();
+    }
+}
+
+function updateImagesPosition() {
+    activeImages.forEach((img) => {
+        // Moltiplicatore 0.6 per rendere il movimento più controllato
+        const distance = (scrollPosition - img.spawnOffset) * 0.6; 
+        
+        const tx = Math.cos(img.angle) * distance;
+        const ty = Math.sin(img.angle) * distance;
+        
+        const scale = Math.min(Math.max(distance / 300, 0), 1);
+        const opacity = Math.min(Math.max(distance / 150, 0), 1);
+
+        // SOLO translate e scale, niente rotate
+        img.element.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(${scale})`;
+        img.element.style.opacity = opacity;
+    });
+}
+    </script>
+</body>
+</html>
