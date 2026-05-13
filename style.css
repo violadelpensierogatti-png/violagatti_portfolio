@@ -1198,5 +1198,19 @@ centered-row img {
         width: 100%; /* Su mobile occupa tutto e si allinea a sx */
         text-align: left;
     }
+    .vimeo-container iframe,
+    .col-image img,
+    .gallery-item img {
+        filter: grayscale(100%);
+        transition: filter 0.4s ease;
+    }
+
+    /* Classe che applicheremo col JavaScript */
+    .vimeo-container.active-mobile iframe,
+    .col-image img.active-mobile,
+    .gallery-item img.active-mobile {
+        filter: grayscale(0%) !important;
+    }
 }
+
 

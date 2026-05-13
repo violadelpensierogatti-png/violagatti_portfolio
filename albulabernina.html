@@ -149,6 +149,28 @@ function togglePlay() {
         video.pause();
     }
 }
+document.addEventListener("DOMContentLoaded", () => {
+    // Selezioniamo sia le immagini che i contenitori vimeo
+    const elementsToWatch = document.querySelectorAll('.gallery-item img, .vimeo-container');
+
+    const observerOptions = {
+        root: null, // usa il viewport
+        rootMargin: '-30% 0px -30% 0px', // "Taglia" l'area di attivazione al centro
+        threshold: 0.5 // l'elemento deve essere visibile almeno al 50%
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active-mobile');
+            } else {
+                entry.target.classList.remove('active-mobile');
+            }
+        });
+    }, observerOptions);
+
+    elementsToWatch.forEach(el => observer.observe(el));
+});
     </script>
 </body>
 </html>
