@@ -885,7 +885,13 @@ nav a:hover, .lang-switch:hover {
 
 .arrow { 
     color: #ff7e5f; 
-    margin-right: 8px;
+    margin-right: 7px;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    letter-spacing: 0.05em;
 }
 
 .gallery-item img {
