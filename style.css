@@ -1098,7 +1098,7 @@ centered-row img {
 .similar-list {
     display: flex;
     flex-direction: column;
-     margin-top: 0;
+    
 }
 
 /* --- Fix Mobile --- */
