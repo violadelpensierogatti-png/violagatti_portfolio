@@ -1,3 +1,25 @@
+
+@font-face {
+    font-family: 'Everett';
+    src: url('fonts/Everett-Light.otf') format('opentype');
+    font-weight: 300; /* Light */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Everett';
+    src: url('fonts/Everett-Regular.otf') format('opentype');
+    font-weight: 400; /* Regular */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Everett';
+    src: url('fonts/Everett-Medium.otf') format('opentype');
+    font-weight: 500; /* Medium */
+    font-style: normal;
+}
+
 /* Reset e Variabili */
 * {
     margin: 0;
@@ -9,7 +31,7 @@
     --bg-color: #EDEDED;
     --primary: #6E6FDA;
     --secondary: #FF8B73;
-    --font-main: 'Uncut Sans', sans-serif;
+    --font-main: 'Everett', sans-serif;
     --font-menu: 'IBM Plex Sans', sans-serif; 
 }
 
@@ -60,6 +82,7 @@ nav a {
     font-weight: 400;
     text-transform: lowercase; /* Mantiene about me, projects, contacts minuscoli */
     transition: color 0.3s ease;
+    display: block;
 }
 
 .lang-switch {
@@ -173,22 +196,24 @@ nav a:hover, .lang-switch:hover {
     }
 }
 
-/* Pallino Arancione */
+/* Cursore Stato normale: Arancione */
 #cursor-effect {
     position: fixed;
-    width: 12px; /* Un po' più piccolino è più elegante */
+    width: 12px;
     height: 12px;
-    background-color: var(--secondary); /* Il tuo arancione */
+    background-color: var(--secondary); /* Arancione */
     border-radius: 50%;
     pointer-events: none;
     z-index: 10000;
     transform: translate(-50%, -50%);
-    
-    /* Mix-blend-mode tolto: ora è un colore pieno */
     mix-blend-mode: normal; 
-    
-    /* Transizione leggerissima per rendere il movimento meno "meccanico" */
-    transition: transform 0.05s ease-out;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Stato sulla Hero: Diventa Viola */
+#cursor-effect.cursor-hero {
+    background-color: var(--primary) !important; /* Forza il Viola */
+    transform: translate(-50%, -50%) scale(1.2); /* Lo ingrandiamo un po' per l'effetto */
 }
 
 /* Opzionale: un leggero feedback quando clicchi */
@@ -208,8 +233,8 @@ nav a:hover, .lang-switch:hover {
 }
 
 .hero-bottom-container {
-    width: 94%; /* Larghezza quasi totale */
-    margin: 0 auto;
+    width: 100%; /* Larghezza quasi totale */
+    margin: 0;
     display: flex;
     flex-direction: column;
 }
@@ -228,18 +253,73 @@ nav a:hover, .lang-switch:hover {
 /* Assicurati che anche il titolo abbia la larghezza piena */
 .hero-title {
     color: var(--primary);
-    font-size: 15.2vw;
+    font-size: 15.5vw;
     line-height: 0.8;
     white-space: nowrap;
     width: 100%; /* Forza la larghezza totale */
-    display: flex;
     justify-content: space-between;
     text-align: justify;
     text-align-last: justify; 
     margin: 0;
     letter-spacing: -0.02em; /* Opzionale: per un look più compatto e pro */
+    text-decoration: none
 }
 
+/* Rimuove la sottolineatura di default e imposta il colore ereditato */
+.hero-link {
+    text-decoration: none;
+    color: inherit; 
+    transition: color 0.3s ease;
+}
+
+/* Effetto Hover: la scritta diventa arancione */
+.hero-link:hover {
+    color: var(--secondary); /* Usa la tua variabile arancione */
+}
+
+@media screen and (max-width: 768px) {
+    /* Ancoraggio estremo al fondo */
+    .hero {
+        justify-content: flex-end; 
+        padding-bottom: 2vh; /* Margine minimo dal bordo inferiore del telefono */
+    }
+
+    .hero-bottom-container {
+        width: 100%; 
+        display:flex;
+        padding: 0 1%; /* Margine laterale minimo per far toccare quasi i bordi */
+        box-sizing: border-box;
+    }
+
+    /* Sottotitolo più grande sopra il titolo */
+    .hero-subtitle {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between; 
+        width: 100%;
+        font-size: 5.5vw; /* Ingrandito come richiesto */
+        margin-bottom: 3px; /* Poco margine sotto rispetto al titolo */
+        text-transform: lowercase;
+    }
+
+    /* Titolo: Uno sopra l'altro, occupa tutta la larghezza */
+    .hero-title {
+        flex-direction: column; 
+        font-size: 32vw; /* Dimensione massimizzata per l'impatto */
+        line-height: 0.8; /* Line-height ridotto per "impacchettare" le scritte */
+        width: 100%;
+        margin: 0;
+        text-align: justify;
+    }
+
+    /* Forza VIOLA e GATTI a stirarsi da bordo a bordo */
+    .hero-title span {
+        display: block;
+        width: 100%;
+        text-align-last: justify; /* Fondamentale per il full-width su singola parola */
+        text-transform: uppercase;
+    }
+}
 /* --- BURGER ICON (DUE LINEE) --- */
 .burger {
     display: none; /* NASCOSTO DI BASE SU DESKTOP */
@@ -397,7 +477,7 @@ nav a:hover, .lang-switch:hover {
 .col-image {
     width: 30%;
     height: calc(100vh - 70px);
-    padding: 30px 20px 60px 40px; /* Padding destro ridotto (Gutter) */
+    padding: 10px 20px 60px 40px; /* Padding destro ridotto (Gutter) */
     display: flex;
     align-items: flex-start;
 }
@@ -432,7 +512,7 @@ nav a:hover, .lang-switch:hover {
 .col-text {
     width: 45%;
     height: calc(100vh - 70px);
-    padding: 20vh 40px 60px 20px; /* Padding sinistro ridotto (Gutter) */
+    padding: 15vh 40px 60px 20px; /* Padding sinistro ridotto (Gutter) */
     overflow-y: auto;
     scrollbar-width: none;
 }
@@ -727,10 +807,9 @@ nav a:hover, .lang-switch:hover {
 
 .project-title {
     font-family: var(--font-main);
+    font-weight: 500; /* Richiama Everett-Medium */
     font-size: 2rem;
     color: var(--primary);
-    border-bottom: 1.5px solid var(--primary);
-    padding-bottom: 13px;
     width: 100%;
     margin: 0;
 }
@@ -748,7 +827,7 @@ nav a:hover, .lang-switch:hover {
     width: 100%;
     height: 1.5px;
     background-color: #6e6fda;
-    margin: 15px 0;
+    margin: 15px 0 15px 0;
 }
 
 .meta-data {

@@ -37,10 +37,14 @@
             <p class="hero-subtitle">
                 <span>communication</span> 
                 <span>design</span> 
-                 <span>portfolio</span>
+                <span>portfolio</span>
             </p>
             <!-- Scritta grande sotto -->
-            <h1 class="hero-title"><span>VIOLA</span> <span>GATTI</span></h1>
+            <h1 class="hero-title">
+    <a href="about.html" class="hero-link">
+        <span>VIOLA</span> <span>GATTI</span>
+    </a>
+</h1>
         </div>
     </main>
 
@@ -54,6 +58,7 @@
              });
          });
         
+        //situe burger menu
         const burger = document.getElementById('burger');
         const nav = document.getElementById('nav-menu');
 
@@ -69,6 +74,19 @@
                 burger.classList.remove('active');
             });
         });
+// situe cursore
+const heroLinks = document.querySelectorAll('.hero-link');
+const cursorNode = document.getElementById('cursor-effect');
+
+heroLinks.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+        cursorNode.classList.add('cursor-hero');
+    });
+
+    link.addEventListener('mouseleave', () => {
+        cursorNode.classList.remove('cursor-hero');
+    });
+});
 
         // Situa delle immagini landing page
    
