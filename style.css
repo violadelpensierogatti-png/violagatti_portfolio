@@ -233,21 +233,34 @@ nav a:hover, .lang-switch:hover {
 }
 
 .hero-bottom-container {
-    width: 100%; /* Larghezza quasi totale */
-    margin: 0;
+    width: 96%; /* Larghezza quasi totale */
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
 }
 
 .hero-subtitle {
     color: var(--primary);
-    font-size: 4vw; /* Puoi regolare leggermente se vuoi i caratteri più grandi/piccoli */
+    font-family: var(--font-main); /* Assicurati che usi Everett */
+    font-size: 4vw; 
     line-height: 1;
     text-transform: lowercase;
-    width: 100%; /* Forza la larghezza totale */
+    width: 100%; 
     display: flex;
-    justify-content: space-between; /* Distribuisce il contenuto sul 100% della riga */
+    justify-content: space-between; 
     margin-bottom: 0.5vw;
+}
+
+.hero-sub-link {
+    text-decoration: none; /* Rimuove la sottolineatura */
+    color: inherit;        /* Prende il viola dalla variabile --primary del padre */
+    transition: color 0.2s ease; /* Transizione veloce e fluida */
+    cursor: pointer;
+}
+
+/* L'hover colora solo la parola su cui si trova il mouse */
+.hero-sub-link:hover {
+    color: var(--secondary); /* Diventa arancione */
 }
 
 /* Assicurati che anche il titolo abbia la larghezza piena */
@@ -280,15 +293,15 @@ nav a:hover, .lang-switch:hover {
 @media screen and (max-width: 768px) {
     /* Ancoraggio estremo al fondo */
     .hero {
-        justify-content: flex-end; 
-        padding-bottom: 2vh; /* Margine minimo dal bordo inferiore del telefono */
+        justify-content: center; 
     }
 
     .hero-bottom-container {
-        width: 100%; 
         display:flex;
         padding: 0 1%; /* Margine laterale minimo per far toccare quasi i bordi */
         box-sizing: border-box;
+        width: 94%; /* Manteniamo la stessa proporzione del desktop */
+        margin: 0 auto;
     }
 
     /* Sottotitolo più grande sopra il titolo */
@@ -298,7 +311,7 @@ nav a:hover, .lang-switch:hover {
         justify-content: space-between; 
         width: 100%;
         font-size: 5.5vw; /* Ingrandito come richiesto */
-        margin-bottom: 3px; /* Poco margine sotto rispetto al titolo */
+        margin-bottom: 16px; /* Poco margine sotto rispetto al titolo */
         text-transform: lowercase;
     }
 
@@ -306,6 +319,7 @@ nav a:hover, .lang-switch:hover {
     .hero-title {
         flex-direction: column; 
         font-size: 32vw; /* Dimensione massimizzata per l'impatto */
+        /* font-weight: 500; */
         line-height: 0.8; /* Line-height ridotto per "impacchettare" le scritte */
         width: 100%;
         margin: 0;
@@ -319,7 +333,48 @@ nav a:hover, .lang-switch:hover {
         text-align-last: justify; /* Fondamentale per il full-width su singola parola */
         text-transform: uppercase;
     }
+    .hero-link:hover {
+    color: var(--primary); /* Usa la tua variabile arancione */
 }
+
+
+}
+/* SPAWN IMMAGINI*/    
+#spawn-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Indispensabile per cliccare quello che c'è sotto */
+    z-index: 999;
+}
+
+.spawned-img {
+    position: absolute; /* Rispetto al container fixed */
+    width: 160px;
+    height: auto;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3);
+    transition: 
+        transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), 
+        opacity 0.6s ease-out,
+        filter 0.3s ease;
+    pointer-events: none;
+    filter: grayscale(100%) drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+}
+
+.spawned-img.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+@media screen and (max-width: 768px) {
+    .spawned-img {
+        width: 120px; /* Più piccole su mobile per non coprire tutto */
+    }
+}
+
 /* --- BURGER ICON (DUE LINEE) --- */
 .burger {
     display: none; /* NASCOSTO DI BASE SU DESKTOP */
@@ -416,6 +471,7 @@ nav a:hover, .lang-switch:hover {
         display: none !important; /* Forza la sparizione su desktop */
     }
 }
+
    /* Animazione Burger */
     .burger.toggle span:nth-child(1) {
         transform: rotate(-45deg) translate(-5px, 5px);
@@ -424,43 +480,9 @@ nav a:hover, .lang-switch:hover {
         transform: rotate(45deg) translate(-5px, -5px);
     }
 
-    .hero-bottom-container {
-        width: 94%; /* Manteniamo la stessa proporzione del desktop */
-        margin: 0 auto;
-    }
+   
     
     
-/* SPAWN IMMAGINI*/    
-  
-#image-spawn-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.spawned-img {
-    position: absolute;
-    width: 240px;
-    height: auto;
-    filter: grayscale(100%);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    transition: transform 0.05s linear, opacity 0.1s linear; 
-    will-change: transform;
-    pointer-events: none; /* Evita che le immagini blocchino i tocchi successivi */
-}
-
-@media screen and (max-width: 768px) {
-    .spawned-img {
-        width: 160px; /* Più piccole su mobile per non coprire tutto */
-    }
-}
 
 /* Layout About Me */
 
@@ -603,7 +625,7 @@ nav a:hover, .lang-switch:hover {
         flex-direction: column; /* Impila le colonne verticalmente */
         height: auto;           /* Permette alla pagina di allungarsi */
         overflow-y: visible;    /* Abilita lo scroll naturale */
-        padding-top: 100px;     /* Più spazio per l'header mobile */
+        padding-top: 60px;     /* Più spazio per l'header mobile */
     }
 
     /* Colonna 1: Immagine */
@@ -642,13 +664,13 @@ nav a:hover, .lang-switch:hover {
 
     /* Ottimizzazione dettagli curriculum */
     .resume-item {
-        padding-left: 0;       /* Rimuoviamo lo sbalzo a destra per guadagnare spazio */
+        padding-left: 26px;       /* Rimuoviamo lo sbalzo a destra per guadagnare spazio */
         margin-bottom: 35px;
     }
 
     .section-title {
         margin-bottom: 25px;
-        font-size: 0.9rem;
+        font-size: 1.1rem;
     }
 
     .cv-link {
@@ -729,6 +751,7 @@ nav a:hover, .lang-switch:hover {
     pointer-events: none;
     z-index: 9999; 
     opacity: 0;
+    background: none !important;
     /* La transizione solo sull'opacity rende l'ingresso fluido ma istantaneo */
     transition: opacity 0.15s ease-in-out;
 }
@@ -738,13 +761,18 @@ nav a:hover, .lang-switch:hover {
     width: 180px; /* Leggermente più grandi */
     height: auto;
     border-radius: 2px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-    will-change: transform; /* Ottimizza il rendering della GPU */
-    /* Rimuoviamo transition: transform per evitare lag nel movimento col mouse */
+    will-change: opacity, transform; /* Ottimizza il rendering della GPU */
+    background: transparent !important; /* Forza lo sfondo vuoto */
+    backface-visibility: hidden;         /* Previene glitch di rendering */
+    -webkit-user-drag: none;  
+    mix-blend-mode: multiply;           
 }
 @media screen and (max-width: 768px) {
     #hover-container {
         display: none;
+    }
+    .project-name {
+        font-size: 2.4rem;
     }
 }
 
@@ -1021,6 +1049,9 @@ centered-row img {
         overflow: visible !important;
         position: relative !important;
     }
+    .arrow { 
+    color: #ff7e5f; 
+}
 
     /* Rimuove lo spazio eccessivo in cima alla gallery ora che è sotto */
     .col-gallery {
