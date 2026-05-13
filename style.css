@@ -668,15 +668,15 @@ nav a:hover, .lang-switch:hover {
 }
 
 .projects-container {
-    padding-top: 140px;
+    padding-top: 150px;
     padding-bottom: 100px;
     background-color: #ededed;
 }
 
 .projects-list {
-   width: 90%;
+    width: 90%;
     margin: 0 auto;
-    border-top: 1px solid var(--primary);
+    border-top: 1.5px solid var(--primary);
     position: relative;
     z-index: 1;
 }
@@ -687,7 +687,7 @@ nav a:hover, .lang-switch:hover {
     align-items: center;
     padding: 30px 0; /* Un po' più compatto */
     text-decoration: none;
-    border-bottom: 1px solid var(--primary);
+    border-bottom: 1.5px solid var(--primary);
     position: relative;
     z-index: auto;
 }
@@ -832,7 +832,7 @@ nav a:hover, .lang-switch:hover {
 
 .meta-data {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     color: var(--secondary);
     text-transform: uppercase;
     line-height: 1.6;
@@ -872,7 +872,7 @@ nav a:hover, .lang-switch:hover {
 .item-caption {
     font-family: 'IBM Plex Mono', monospace;
     color: #ff7e5f;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     margin-top: 8px;
     line-height: 1.4;
 }
@@ -1080,34 +1080,25 @@ centered-row img {
     filter: grayscale(0%);
 }
 
-/* --- Progetti Correlati --- */
-.related-projects {
-    width: 100%;
-    border-top: 1px solid var(--primary);
-    margin-top: 60px;
-    padding-top: 20px;
+.similar-projects {
+    width: 94%; /* Allineato al container principale */
+    margin: 4rem auto; /* Spazio dal contenuto sopra */
 }
 
-.related-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid #ddd;
-    text-decoration: none;
-    color: var(--primary);
-    font-family: 'IBM Plex Mono', monospace;
+/*progetti simili*/
+.section-label {
+    font-family: var(--font-main);
     font-size: 0.9rem;
-    transition: color 0.3s ease;
+    color: var(--primary);
+    margin: 1rem 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
-.related-item:hover {
-    color: var(--secondary); /* Diventa arancione al passaggio */
-}
-
-.rel-cat {
-    font-size: 0.8rem;
-    opacity: 0.6;
+.similar-list {
+    display: flex;
+    flex-direction: column;
+     margin-top: 0;
 }
 
 /* --- Fix Mobile --- */
