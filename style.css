@@ -1091,22 +1091,34 @@ nav a:hover, .lang-switch:hover {
         gap: 50px !important; /* Distanza tra un'immagine e l'altra */
     }
 
-    /* Le righe di immagini (2 o 3 foto) diventano una colonna singola */
-    .image-row, 
-    .centered-row, 
+
+    .image-row .centered-row, 
     #appzonzo {
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 20px !important;
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 15px; /* Spazio tra le due colonne */
     }
 
+    /* Imposta immagini e video al 50% della larghezza */
     .image-row img, 
+    .image-row video 
     .centered-row img, 
     #appzonzo img {
-        width: 100% !important;
-        max-width: none !important;
+        width: calc(50% - 10px); /* 2 per riga */
+        height: auto;
+        filter: grayscale(100%);
+        transition: filter 0.6s ease;
     }
+
+    /* L'effetto colore al centro dello schermo (Intersection Observer) */
+    .image-row img.active-mobile,
+    .image-row video.active-mobile {
+        filter: grayscale(0%) !important;
+    }
+
+
 }
+
 .vimeo-container {
     position: relative;
     padding-bottom: 56.25%; /* Ratio 16:9 */
