@@ -259,7 +259,7 @@ nav a:hover, .lang-switch:hover {
     color: inherit;        /* Prende il viola dalla variabile --primary del padre */
     transition: color 0.2s ease; /* Transizione veloce e fluida */
     cursor: pointer;
-    pointer-events: auto;
+    pointer-events: auto;    
 }
 
 /* L'hover colora solo la parola su cui si trova il mouse */
@@ -377,7 +377,14 @@ nav a:hover, .lang-switch:hover {
 
 @media screen and (max-width: 768px) {
     .spawned-img {
-        width: 120px; /* Più piccole su mobile per non coprire tutto */
+        width: 120px;
+        /* Riduciamo o eliminiamo il drop-shadow su mobile se lagga */
+        filter: grayscale(100%); 
+        /* Usiamo un'ombra più semplice se necessaria */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+        
+        /* Accorciamo ancora la transizione su mobile */
+        transition: transform 0.3s ease-out, opacity 0.2s ease-out;
     }
 }
 
@@ -911,7 +918,6 @@ nav a:hover, .lang-switch:hover {
     width: 50%;
     height: auto;
     display: block; 
-    opacity: 80%;
     margin-left: auto;
     margin-right: auto;
     filter: grayscale(100%);
@@ -951,12 +957,15 @@ nav a:hover, .lang-switch:hover {
 }
 
 /* Regola specifica per le immagini dentro la riga */
-.image-row img {
-    width: calc(33.33% - 10px); /* Divide lo spazio in 3 parti uguali */
+.image-row img, 
+.image-row video {
+    width: calc(33.33% - 10px);
     height: auto;
-    object-fit: contain;        /* Mantiene le proporzioni originali */
+    object-fit: contain;
     filter: grayscale(100%);
-    transition: filter 0.5s ease;
+    /* Rende trasparente lo sfondo bianco del video sul grigio del sito */
+    mix-blend-mode: multiply; 
+    transition: filter 0.5s ease, transform 0.5s ease;
 }
 
 .centered-row {
@@ -966,7 +975,7 @@ nav a:hover, .lang-switch:hover {
     margin: 30px 0;
 }
 
-centered-row img {
+.centered-row img, .centered-row video  {
     width: calc(33.33% - 10px); 
     height: auto;
     object-fit: contain;
@@ -978,11 +987,10 @@ centered-row img {
     filter: grayscale(0%);
 
 }
-/* L'hover continua a funzionare come per le altre */
-.image-row img:hover {
+.image-row img:hover, 
+.image-row video:hover {
     filter: grayscale(0%);
 }
-
 
 #appzonzo {
     display: flex;
