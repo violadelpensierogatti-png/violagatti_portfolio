@@ -983,6 +983,7 @@ nav a:hover, .lang-switch:hover {
     transition: filter 0.5s ease;
 }
 
+
 .centered-row img:hover {
     filter: grayscale(0%);
 
@@ -1042,6 +1043,17 @@ nav a:hover, .lang-switch:hover {
 /* La prima immagine NON è absolute così da dare l'altezza corretta al contenitore */
 .css-gif img:first-child {
     position: relative;
+}
+
+#mockup-pc img {
+    width: 45%; /* Quasi metà pagina ciascuna */
+    max-width: 600px; /* Evita che diventino giganti su schermi enormi */
+    height: auto;
+    object-fit: contain;
+}
+
+#mockup-pc.centered-row {
+    gap: 20px; /* Riduciamo un po' il gap se le immagini sono molto grandi */
 }
 
 /* Ritardi (Delay) per ogni immagine */
@@ -1115,6 +1127,23 @@ nav a:hover, .lang-switch:hover {
     .image-row video.active-mobile {
         filter: grayscale(0%) !important;
     }
+#mockup-pc {
+        flex-direction: column; /* Le mette in verticale */
+        align-items: center;    /* Le centra orizzontalmente */
+        gap: 30px;              /* Spazio verticale tra le due immagini */
+    }
+
+    #mockup-pc img {
+        width: 90%; /* Occupano quasi tutta la larghezza dello smartphone */
+        filter: grayscale(100%);
+        transition: filter 0.6s ease;
+    }
+
+    /* Mantieni l'effetto colore al centro anche qui */
+    #mockup-pc img.active-mobile {
+        filter: grayscale(0%) !important;
+    }
+  
 
 
 }
@@ -1236,9 +1265,12 @@ nav a:hover, .lang-switch:hover {
         width: 100%; /* Su mobile occupa tutto e si allinea a sx */
         text-align: left;
     }
-    .vimeo-container iframe,
     .col-image img,
-    .gallery-item img {
+    .gallery-item img 
+    .image-row img, 
+    .image-row video, 
+    .vimeo-container iframe,
+    #mockup-pc img{
         filter: grayscale(100%);
         transition: filter 0.4s ease;
     }
