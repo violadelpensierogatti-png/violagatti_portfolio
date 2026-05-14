@@ -188,7 +188,7 @@ nav a:hover, .lang-switch:hover {
         gap: 30px;
     }
     .footer-right {
-        text-align: left;
+        text-align: center;
     }
     .social-links a {
         margin-left: 0;
@@ -249,6 +249,9 @@ nav a:hover, .lang-switch:hover {
     display: flex;
     justify-content: space-between; 
     margin-bottom: 0.5vw;
+    position: relative;
+    z-index: 10; /* Lo tiene sopra eventuali aree invisibili del titolo */
+    pointer-events: none;
 }
 
 .hero-sub-link {
@@ -256,6 +259,7 @@ nav a:hover, .lang-switch:hover {
     color: inherit;        /* Prende il viola dalla variabile --primary del padre */
     transition: color 0.2s ease; /* Transizione veloce e fluida */
     cursor: pointer;
+    pointer-events: auto;
 }
 
 /* L'hover colora solo la parola su cui si trova il mouse */
@@ -275,20 +279,22 @@ nav a:hover, .lang-switch:hover {
     text-align-last: justify; 
     margin: 0;
     letter-spacing: -0.02em; /* Opzionale: per un look più compatto e pro */
-    text-decoration: none
+    text-decoration: none;
+    pointer-events: none;
 }
 
-/* Rimuove la sottolineatura di default e imposta il colore ereditato */
 .hero-link {
     text-decoration: none;
     color: inherit; 
     transition: color 0.3s ease;
+    pointer-events: auto; /* Solo il link/testo reagisce al mouse */
+    display: inline-block; /* Fondamentale per limitare l'area di hover */
+    width: 100%;
+}
+.hero-link:hover {
+    color: var(--secondary);
 }
 
-/* Effetto Hover: la scritta diventa arancione */
-.hero-link:hover {
-    color: var(--secondary); /* Usa la tua variabile arancione */
-}
 
 @media screen and (max-width: 768px) {
     /* Ancoraggio estremo al fondo */
