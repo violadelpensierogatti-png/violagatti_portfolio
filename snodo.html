@@ -31,6 +31,10 @@
     </header>
    <main class="project-detail-container">
     <!-- COLONNA 1: GALLERY (Scorre) -->
+       <div class="scroll-progress-container">
+        <div class="scroll-progress-bar"></div>
+    </div>
+
     <section class="col-gallery">
         
         <div class="gallery-item">
@@ -191,6 +195,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }, observerOptions);
 
     elementsToWatch.forEach(el => observer.observe(el));
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const gallery = document.querySelector('.col-gallery');
+    const progressBar = document.querySelector('.scroll-progress-bar');
+
+    if (gallery && progressBar) {
+        gallery.addEventListener('scroll', () => {
+            const scrollHeight = gallery.scrollHeight - gallery.clientHeight;
+            const scrollTop = gallery.scrollTop;
+            
+            // Calcolo percentuale
+            let scrollPercent = (scrollTop / scrollHeight) * 100;
+            
+            // Mantieni almeno un piccolo pezzetto (5%) visibile in alto
+            if (scrollPercent < 5) scrollPercent = 5;
+            
+            progressBar.style.height = scrollPercent + "%";
+        });
+    }
 });
     </script>
 </body>

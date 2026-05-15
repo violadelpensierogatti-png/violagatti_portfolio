@@ -833,6 +833,44 @@ nav a:hover, .lang-switch:hover {
     transform: none;
 }
 
+.col-gallery {
+    position: relative; 
+    width: 65%;
+    height: calc(100vh - 80px);
+    padding: 25px 1vw 2vw 3vw;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    scrollbar-width: none;
+}
+
+.scroll-progress-container {
+    position: sticky;
+    top: 40px; /* Distanza dall'alto del contenitore mentre scorri */
+    float: right; /* La spinge verso la sidebar */
+    width: 2px;
+    height: 800px; /* Altezza visibile della barra */
+    background-color: rgba(110, 111, 218, 0.2); /* Grigio/Viola chiaro visibile subito */
+    z-index: 9999;
+    pointer-events: none;
+    display: block !important;
+    margin-left: 2vw;
+}
+
+.scroll-progress-bar {
+    width: 100%;
+    height: 20px; /* ALTEZZA MINIMA: così l'arancione si vede da subito */
+    background-color: var(--secondary);
+    transition: height 0.1s ease-out;
+}
+/* Su mobile la nascondiamo per evitare sovrapposizioni */
+@media screen and (max-width: 768px) {
+    .scroll-progress-container {
+        display: none;
+    }
+}
+
 /* Colonna Sidebar: FERMA */
 .col-sidebar {
     width: 35%;
