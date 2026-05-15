@@ -120,8 +120,8 @@ nav a:hover, .lang-switch:hover {
     margin-top: 0;
     z-index: 100;
     opacity: 80%;
-}
-
+    position: relative;
+ }
 .footer-content {
     display: flex;
     justify-content: space-between;
@@ -688,9 +688,13 @@ nav a:hover, .lang-switch:hover {
         max-height: none;
         margin: 0 auto;
         display: block;
-        filter: grayscale(0%);
+        filter: grayscale(100%) !important; 
+        transition: filter 0.8s ease;
     }
-
+.fixed-img.active-mobile,
+    .col-image.active-mobile .fixed-img {
+        filter: grayscale(0%) !important;
+    }
     /* Colonna Info (quella centrale) */
     .col-info {
         background-color: transparent; /* Se vuoi mantenere continuità */
@@ -1347,24 +1351,56 @@ text-align: left;
         width: 100%; /* Su mobile occupa tutto e si allinea a sx */
         text-align: left;
     }
-    .col-image img,
-    .gallery-item img 
+}
+
+/* --- GESTIONE COLORE MOBILE (Intersection Observer) --- */
+@media screen and (max-width: 768px) {
+    /* 1. Stato Base: Tutto Grigio */
+    .gallery-item img, 
+    .vimeo-container iframe, 
     .image-row img, 
-    .image-row video, 
-    .vimeo-container iframe,
-    #mockup-pc img{
-        filter: grayscale(100%);
-        transition: filter 0.4s ease;
+    .image-row video,
+    .centered-row img,
+    .centered-row video,
+    #mockup-pc img,
+    #appzonzo img,
+    .col-image img,
+    .fixed-img img,
+    .css-gif img,
+    #poster {
+        filter: grayscale(100%) !important; 
+        transition: filter 0.8s ease;
     }
 
-    /* Classe che applicheremo col JavaScript */
-    .vimeo-container.active-mobile iframe,
-    .col-image img.active-mobile,
-    .gallery-item img.active-mobile {
+    /* 2. Stato Attivo: Se la classe è sull'elemento stesso */
+    .active-mobile, 
+    img.active-mobile, 
+    video.active-mobile,
+    iframe.active-mobile {
+        filter: grayscale(0%) !important;
+    }
+
+    /* 3. Stato Attivo: Se la classe è sul contenitore (fondamentale per righe e video) */
+    .active-mobile img,
+    .active-mobile video,
+    .active-mobile iframe {
         filter: grayscale(0%) !important;
     }
 }
 
+/* --- HOVER DESKTOP (Solo sopra i 768px) --- */
+@media (min-width: 769px) {
+    .col-image img:hover,
+    .gallery-item img:hover, 
+    .vimeo-container:hover iframe,
+    .image-row img:hover,
+    .image-row video:hover,
+    #poster:hover,
+    #mockup-pc img:hover,
+    #appzonzo img:hover {
+        filter: grayscale(0%) !important;
+    }
+}
 /* CONTATTI */
 .contact-item.item-title {
     position: absolute;

@@ -204,26 +204,25 @@ updateScroll(textCol);
 
 
     // --- 5. COLORAZIONE IMG x MOBILE (Intersection Observer) ---
-    const elementsToWatch = document.querySelectorAll('.gallery-item img, .vimeo-container, .col-image, .image-row img, .image-row video, #mockup-pc img');
-    if (elementsToWatch.length > 0) {
-        const observerOptions = {
-            root: gallery ? gallery : null, // Se c'è la colonna gallery usa quella, altrimenti il viewport
-            rootMargin: '-25% 0px -25% 0px',
-            threshold: 0.1
-        };
+const elementsToWatch = document.querySelectorAll('.project-detail-container img, .project-detail-container video, .vimeo-container, .css-gif, .col-image, .fixed-img');
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active-mobile');
-                } else {
-                    entry.target.classList.remove('active-mobile');
-                }
-            });
-        }, observerOptions);
+const observerOptions = {
+    root: null,
+    rootMargin: '-25% 0px -25% 0px', 
+    threshold: 0.1
+};
 
-        elementsToWatch.forEach(el => observer.observe(el));
-    }
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active-mobile');
+        } else {
+            entry.target.classList.remove('active-mobile');
+        }
+    });
+}, observerOptions);
+
+elementsToWatch.forEach(el => observer.observe(el));
 
     // --- 6. VIDEO PLAYER (Vimeo & HTML5) ---
     const vimeoIframe = document.querySelector('#vimeo-player');
