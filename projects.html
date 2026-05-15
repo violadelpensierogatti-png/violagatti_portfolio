@@ -26,7 +26,7 @@
         <nav id="nav-menu">
             <a href="about.html">about me</a>
             <a href="projects.html">projects</a>
-            <a href="#contacts">contacts</a>
+            <a href="contacts.html">contacts</a>
             <span class="lang-switch">IT | EN</span>
         </nav>
     </div>
@@ -95,102 +95,7 @@
         </div>
     </div>
 </footer>
-
-    <script>
-                   const burger = document.getElementById('burger');
-        const nav = document.getElementById('nav-menu');
-
-        burger.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            burger.classList.toggle('active'); // Fa incrociare le linee e le colora di arancione
-        });
-
-        // Chiudi il menu quando clicchi un link
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                burger.classList.remove('active');
-            });
-        });
-        
-        const hoverContainer = document.getElementById('hover-container');
-        const projectItems = document.querySelectorAll('.project-item');
-        const cursor = document.getElementById('cursor-effect');
-
-        // --- 1. LOGICA DI PRELOADING ---
-        // Creiamo un oggetto per memorizzare le immagini già caricate
-        const preloadedImages = {};
-
-        function preloadProjectImages() {
-            projectItems.forEach(item => {
-                const sources = item.getAttribute('data-images').split(',');
-                const id = item.innerText.trim(); // Usiamo il nome come chiave
-                preloadedImages[id] = [];
-
-                sources.forEach(src => {
-                    const img = new Image(); // Crea oggetto immagine in memoria
-                    img.src = src.trim();
-                    preloadedImages[id].push(img); // Il browser la scarica ora
-                });
-            });
-        }
-
-        // Avviamo il preload al caricamento della pagina
-        window.addEventListener('load', preloadProjectImages);
-
-        // --- 2. MOVIMENTO CURSORE & PARALLAX ---
-        document.addEventListener('mousemove', (e) => {
-            requestAnimationFrame(() => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-                
-                const images = document.querySelectorAll('.floating-img');
-                images.forEach((img, i) => {
-                    const ratio = (i + 1) * 0.012; // Parallax leggermente più sottile
-                    const moveX = (window.innerWidth / 2 - e.clientX) * ratio;
-                    const moveY = (window.innerHeight / 2 - e.clientY) * ratio;
-                    img.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px)) rotate(${img.dataset.rotation}deg)`;
-                });
-            });
-        });
-
-        // --- 3. EVENTI HOVER ---
-        projectItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                const id = item.innerText.trim();
-                const sources = item.getAttribute('data-images').split(',');
-                hoverContainer.innerHTML = ''; 
-                
-                const rect = item.getBoundingClientRect();
-                const centerY = rect.top + (rect.height / 2);
-                const slotsX = [31, 43, 56, 70];
-
-                sources.forEach((src, index) => {
-                    if (index < slotsX.length) {
-                        const img = document.createElement('img');
-                        img.src = src.trim();
-                        img.className = 'floating-img';
-
-                        const rotation = (index % 2 === 0) ? -4 : 4;
-                        img.dataset.rotation = rotation; // Salviamo la rotazione per il parallax
-
-                        img.style.left = `${slotsX[index]}%`;
-                        img.style.top = `${centerY + (index % 2 === 0 ? -15 : 15)}px`;
-                        
-                        // Applichiamo la trasformazione iniziale
-                        img.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
-                        
-                        hoverContainer.appendChild(img);
-                    }
-                });
-
-                hoverContainer.style.opacity = '1';
-            });
-
-            item.addEventListener('mouseleave', () => {
-                hoverContainer.style.opacity = '0';
-            });
-        });
-    </script>
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

@@ -25,7 +25,7 @@
         <nav id="nav-menu">
             <a href="about.html">about me</a>
             <a href="projects.html">projects</a>
-            <a href="#contacts">contacts</a>
+            <a href="contacts.html">contacts</a>
             <span class="lang-switch">IT | EN</span>
         </nav>
     </div>
@@ -49,126 +49,7 @@
 </h1>
         </div>
     </main>
-
-    <script>
-         const cursor = document.getElementById('cursor-effect');
-            document.addEventListener('mousemove', (e) => {
-        // Usiamo requestAnimationFrame per prestazioni migliori durante lo scroll
-        requestAnimationFrame(() => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-             });
-         });
-        
-        //situe burger menu
-        const burger = document.getElementById('burger');
-        const nav = document.getElementById('nav-menu');
-
-        burger.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            burger.classList.toggle('active'); // Fa incrociare le linee e le colora di arancione
-        });
-
-        // Chiudi il menu quando clicchi un link
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                burger.classList.remove('active');
-            });
-        });
-// situe cursore
-const heroLinks = document.querySelectorAll('.hero-link');
-const cursorNode = document.getElementById('cursor-effect');
-
-heroLinks.forEach(link => {
-    link.addEventListener('mouseenter', () => {
-        cursorNode.classList.add('cursor-hero');
-    });
-
-    link.addEventListener('mouseleave', () => {
-        cursorNode.classList.remove('cursor-hero');
-    });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    const spawnContainer = document.getElementById('spawn-container');
-    const imagesList = [
-         'links/dumbo.webp',
-    'links/guerrilla.webp',
-    'links/costa copta.webp',
-    'links/GattiViola_cartaz.pdf',
-    'links/35x70NonIstituzionale.webp',
-    'links/appbernina3.webp',
-    'links/artifacts.webp',
-    'links/copertineimpilate2.webp',
-    'links/DSC_1652.webp',
-    'links/DSC_9115-2.webp',
-    'links/DSC08061.webp',
-    'links/fruttivendolo.webp',
-    'links/group 4.webp',
-    'links/IMG_2791.webp',
-    'links/IMG_8747.webp',
-    'links/IMG_8964.webp',
-    'links/IMG_9268.webp',
-    'links/interno-1.webp',
-    'links/magliepomi.webp',
-    'links/mockupinsta3.webp',
-    'links/mucchin.webp',
-    'links/P5270220.webp',
-    'links/P5270255.webp',
-    'links/Two smartphone mockups.png',
-    'links/volantini mockup.webp',
-    ];
-
-    let activeImages = [];
-    let imgIndex = 0;
-    let lastMousePos = { x: 0, y: 0 };
-    const pixelsPerSpawn = 80; // Abbassato un po' per renderlo più sensibile
-
-    window.addEventListener('mousemove', (e) => {
-        const dist = Math.hypot(e.clientX - lastMousePos.x, e.clientY - lastMousePos.y);
-
-        if (dist > pixelsPerSpawn) {
-            spawnImageAtMouse(e.clientX, e.clientY);
-            lastMousePos = { x: e.clientX, y: e.clientY };
-        }
-    });
-
-   function spawnImageAtMouse(x, y) {
-    if (!spawnContainer) return;
-
-    const imgElement = document.createElement('img');
-    imgElement.src = imagesList[imgIndex];
-    imgElement.className = 'spawned-img';
-    
-    imgElement.style.left = `${x}px`;
-    imgElement.style.top = `${y}px`;
-
-    const randomRotation = (Math.random() - 0.5) * 15;
-
-    spawnContainer.appendChild(imgElement);
-    imgIndex = (imgIndex + 1) % imagesList.length;
-
-    // 1. Appare fluidamente
-    requestAnimationFrame(() => {
-        imgElement.classList.add('visible');
-        imgElement.style.transform = `translate(-50%, -50%) scale(1) rotate(${randomRotation}deg)`;
-    });
-
-    // 2. Scompare dopo 1.5 secondi (Fade out)
-    setTimeout(() => {
-        imgElement.classList.remove('visible');
-        imgElement.style.transform = `translate(-50%, -50%) scale(1) rotate(${randomRotation}deg)`;
-        imgElement.style.opacity = '0';
-    }, 800); // Durata della visibilità
-
-    // 3. Rimozione definitiva dal DOM dopo che il fade-out è finito
-    setTimeout(() => {
-        imgElement.remove();
-    }, 1500); // 1500ms + 600ms di transizione CSS
-}
-});
-    </script>
-    <script src="https://player.vimeo.com/api/player.js"></script>
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

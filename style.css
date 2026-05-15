@@ -40,7 +40,12 @@ body {
     font-family: var(--font-main);
     overflow: hidden;
     cursor: none;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #ededed;
 }
+
 body, html {
     overflow-x: hidden;
     overflow-y: auto;
@@ -114,6 +119,7 @@ nav a:hover, .lang-switch:hover {
     padding: 40px 5%; /* Ridotto il padding per renderlo una fascia più compatta */
     margin-top: 0;
     z-index: 100;
+    opacity: 80%;
 }
 
 .footer-content {
@@ -535,7 +541,7 @@ nav a:hover, .lang-switch:hover {
 
 /* Colonna 2: Info Mono */
 .col-info {
-    width: 25%;
+    width: 28%;
     height: calc(100vh - 70px);
     padding: 60px 20px; /* Gutter bilanciato ai lati */
     display: flex;
@@ -550,10 +556,31 @@ nav a:hover, .lang-switch:hover {
     padding: 15vh 40px 60px 20px; /* Padding sinistro ridotto (Gutter) */
     overflow-y: auto;
     scrollbar-width: none;
+    position:relative;
 }
 .col-text::-webkit-scrollbar {
     display: none;
 }
+
+  .scroll-progress-container-left {
+    position: sticky;
+    top: 15vh; /* Allineata all'inizio del tuo padding-top */
+    float: left; /* Spostata a sinistra */
+    width: 2px;
+    height: 690px; /* Più corta come richiesto */
+    background-color: rgba(110, 111, 218, 0.15); 
+    margin-bottom: -220px; /* Pareggia l'altezza per non occupare spazio verticale */
+    z-index: 2000;
+    pointer-events: none;
+}
+
+.scroll-progress-bar {
+    width: 100%;
+    height: 15px; /* Parte già visibile */
+    background-color: var(--secondary);
+    transition: height 0.1s linear;
+}
+
 /* Stile per le parole trigger */
 .trigger-word {
     font-weight: 700;
@@ -850,7 +877,7 @@ nav a:hover, .lang-switch:hover {
     top: 40px; /* Distanza dall'alto del contenitore mentre scorri */
     float: right; /* La spinge verso la sidebar */
     width: 2px;
-    height: 800px; /* Altezza visibile della barra */
+    height: 815px; /* Altezza visibile della barra */
     background-color: rgba(110, 111, 218, 0.2); /* Grigio/Viola chiaro visibile subito */
     z-index: 9999;
     pointer-events: none;
@@ -1320,5 +1347,77 @@ nav a:hover, .lang-switch:hover {
         filter: grayscale(0%) !important;
     }
 }
+
+/* CONTATTI */
+.contact-item.item-title {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.5rem; /* Dimensione unica per tutti */
+    font-weight: 500;
+    color: #6e6fda; /* Il tuo viola pieno */
+    white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Effetto molla */
+    z-index: 10;
+}
+
+/* Hover: cambiano colore e si spostano leggermente */
+.contact-item.item-title:hover {
+    color: var(--secondary); /* Diventa arancione */
+    transform: translate(-50%, -50%) scale(1.1);
+    z-index: 20;
+}
+
+.contact-item .arrow {
+    color: var(--secondary);
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+/* Dati tecnici negli angoli */
+.contact-data {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    right: 40px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #999;
+    text-transform: uppercase;
+}
+
+.label { color: #6e6fda; font-weight: bold; }
+
+/* Mobile: in colonna se lo schermo è piccolo */
+@media screen and (max-width: 768px) {
+    .contact-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 60vh;
+        gap: 25px;
+    }
+    .contact-item.item-title {
+        position: static !important;
+        transform: none !important;
+        font-size: 1.3rem;
+    }
+
+    .contact-data {
+        position: relative;
+        flex-direction: column;
+        gap: 20px;
+        bottom: 0;
+        left: 0;
+        text-align: center !important;
+        padding-top: 40px;
+    }
+    .data-block { text-align: center !important; }
+}
+
 
 

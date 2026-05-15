@@ -24,7 +24,7 @@
         <nav id="nav-menu">
             <a href="about.html">about me</a>
             <a href="projects.html">projects</a>
-            <a href="#contacts">contacts</a>
+            <a href="contacts.html">contacts</a>
             <span class="lang-switch">IT | EN</span>
         </nav>
     </div>
@@ -39,11 +39,15 @@
     <!-- Colonna 2: Testo Mono al bottom (Larghezza aumentata) -->
     <div class="col-info">
         <div class="info-bottom">
-            <p>I'm a communication designer with a focus on the <span class="trigger-word">material</span> and <span class="trigger-word">social</span> dimensions of design. Throughout my journey, I have developed a strong sensitivity to materials and solid hands-on skills, allowing me to translate ideas into tangible and well-crafted solutions. I see design as a collaborative process: working in teams, engaging in dialogue, and building relationships based on listening and trust are central to my approach. I bring precision, a practical mindset, and adaptability, contributing to harmonious and productive working environments.</p>
+            <p>I'm a communication designer based in Milan with a focus on the <span class="trigger-word">material</span> and <span class="trigger-word">social</span> dimensions of design. Throughout my journey, I have developed a strong sensitivity to materials and solid hands-on skills, allowing me to translate ideas into tangible and well-crafted solutions. I see design as a collaborative process: working in teams, engaging in dialogue, and building relationships based on listening and trust are central to my approach. I bring precision, a practical mindset, and adaptability, contributing to harmonious and productive working environments.</p>
         </div>
     </div>
 
-    <!-- Colonna 3: Testo lungo (La più larga, scorrevole) -->
+   <div class="scroll-progress-container-left">
+        <div class="scroll-progress-bar"></div>
+    </div> 
+     <!-- Colonna 3: Testo lungo (La più larga, scorrevole) -->
+     
     <div class="col-text">
         <div class="scroll-content">
             
@@ -130,95 +134,7 @@
 
 <div id="hover-preview-container"></div>
 
-<script>
-     const cursor = document.getElementById('cursor-effect');
-            document.addEventListener('mousemove', (e) => {
-        // Usiamo requestAnimationFrame per prestazioni migliori durante lo scroll
-        requestAnimationFrame(() => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-             });
-         });
-         
-                 const burger = document.getElementById('burger');
-        const nav = document.getElementById('nav-menu');
-
-        burger.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            burger.classList.toggle('active'); // Fa incrociare le linee e le colora di arancione
-        });
-
-        // Chiudi il menu quando clicchi un link
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                burger.classList.remove('active');
-            });
-        });
-        
-        // --- LOGICA TRIGGER WORDS ---
-const triggers = document.querySelectorAll('.trigger-word');
-const previewContainer = document.getElementById('hover-preview-container');
-const preloadedImages = {};
-
-// Precaricamento
-triggers.forEach(trigger => {
-    const src = trigger.getAttribute('data-img');
-    if (src) {
-        const img = new Image();
-        img.src = src;
-        preloadedImages[src] = img;
-    }
-});
-
-triggers.forEach(trigger => {
-    trigger.addEventListener('mouseenter', () => {
-        const imgSrc = trigger.getAttribute('data-img');
-        
-        if (preloadedImages[imgSrc]) {
-            while (previewContainer.firstChild) {
-                previewContainer.removeChild(previewContainer.firstChild);
-            }
-            
-            // Aggiungiamo l'immagine
-            previewContainer.appendChild(preloadedImages[imgSrc]);
-            previewContainer.style.display = 'block';
-        }
-    });
-
-    trigger.addEventListener('mousemove', (e) => {
-        requestAnimationFrame(() => {
-            // Posizionamento rispetto al cursore
-            previewContainer.style.left = (e.clientX + 20) + 'px';
-            previewContainer.style.top = (e.clientY - 150) + 'px';
-        });
-    });
-
-    trigger.addEventListener('mouseleave', () => {
-        previewContainer.style.display = 'none';
-        previewContainer.innerHTML = '';
-    });
-}); 
-document.addEventListener("DOMContentLoaded", () => {
-    // Selezioniamo sia le immagini che i contenitori vimeo
-    const elementsToWatch = document.querySelectorAll('.gallery-item img, .vimeo-container, .col-image');
-
-    const observerOptions = {
-        root: null, // usa il viewport
-        rootMargin: '-30% 0px -30% 0px', // "Taglia" l'area di attivazione al centro
-        threshold: 0.5 // l'elemento deve essere visibile almeno al 50%
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active-mobile');
-            } else {
-                entry.target.classList.remove('active-mobile');
-            }
-        });
-    }, observerOptions);
-
-    elementsToWatch.forEach(el => observer.observe(el));
-});
-</script>
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -24,7 +24,7 @@
         <nav id="nav-menu">
             <a href="about.html">about me</a>
             <a href="projects.html">projects</a>
-            <a href="#contacts">contacts</a>
+            <a href="contacts.html">contacts</a>
             <span class="lang-switch">IT | EN</span>
         </nav>
     </div>
@@ -126,93 +126,7 @@ them together, acting in effect as a ‘fil rouge’.
         </div>
     </div>
 </footer>
-
-    <script>
-        const cursor = document.getElementById('cursor-effect');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-          const burger = document.getElementById('burger');
-        const nav = document.getElementById('nav-menu');
-
-        burger.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            burger.classList.toggle('active'); // Fa incrociare le linee e le colora di arancione
-        });
-
-        // Chiudi il menu quando clicchi un link
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                burger.classList.remove('active');
-            });
-        });
-        
-function togglePlay() {
-    const video = document.getElementById("guerrillavideo");
-    if (video.paused) {
-        video.play();
-    } else {
-        video.pause();
-    }
-}
-
-    const iframe = document.querySelector('#vimeo-player');
-    const wrapper = document.querySelector('#vimeo-wrapper');
-    const player = new Vimeo.Player(iframe);
-
-    // Quando il video parte, aggiunge la classe per il colore fisso
-    player.on('play', function() {
-        wrapper.classList.add('is-playing');
-    });
-
-    // Opzionale: se vuoi che torni grigio quando va in pausa
-    player.on('pause', function() {
-        wrapper.classList.remove('is-playing');
-    });
-document.addEventListener("DOMContentLoaded", () => {
-    // Selezioniamo sia le immagini che i contenitori vimeo
-    const elementsToWatch = document.querySelectorAll('.gallery-item img, .vimeo-container,  .col-image');
-
-    const observerOptions = {
-        root: null, // usa il viewport
-        rootMargin: '-30% 0px -30% 0px', // "Taglia" l'area di attivazione al centro
-        threshold: 0.5 // l'elemento deve essere visibile almeno al 50%
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active-mobile');
-            } else {
-                entry.target.classList.remove('active-mobile');
-            }
-        });
-    }, observerOptions);
-
-    elementsToWatch.forEach(el => observer.observe(el));
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    const gallery = document.querySelector('.col-gallery');
-    const progressBar = document.querySelector('.scroll-progress-bar');
-
-    if (gallery && progressBar) {
-        gallery.addEventListener('scroll', () => {
-            const scrollHeight = gallery.scrollHeight - gallery.clientHeight;
-            const scrollTop = gallery.scrollTop;
-            
-            // Calcolo percentuale
-            let scrollPercent = (scrollTop / scrollHeight) * 100;
-            
-            // Mantieni almeno un piccolo pezzetto (5%) visibile in alto
-            if (scrollPercent < 5) scrollPercent = 5;
-            
-            progressBar.style.height = scrollPercent + "%";
-        });
-    }
-});
-    </script>
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
