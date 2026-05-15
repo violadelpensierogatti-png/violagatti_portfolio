@@ -201,6 +201,8 @@ function updateScroll(element) {
 // Attiva sulla colonna che trova nella pagina attuale
 updateScroll(galleryCol);
 updateScroll(textCol);
+
+
     // --- 5. COLORAZIONE IMG x MOBILE (Intersection Observer) ---
     const elementsToWatch = document.querySelectorAll('.gallery-item img, .vimeo-container, .col-image, .image-row img, .image-row video, #mockup-pc img');
     if (elementsToWatch.length > 0) {

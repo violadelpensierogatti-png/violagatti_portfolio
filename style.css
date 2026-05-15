@@ -562,7 +562,7 @@ nav a:hover, .lang-switch:hover {
     display: none;
 }
 
-  .scroll-progress-container-left {
+.scroll-progress-container-left {
     position: sticky;
     top: 15vh; /* Allineata all'inizio del tuo padding-top */
     float: left; /* Spostata a sinistra */
@@ -661,64 +661,81 @@ nav a:hover, .lang-switch:hover {
 /* --- ADAPTIVE LAYOUT (MOBILE) --- */
 
 @media screen and (max-width: 768px) {
+    /* 1. Reset del contenitore principale */
     .about-container {
-        flex-direction: column; /* Impila le colonne verticalmente */
-        height: auto;           /* Permette alla pagina di allungarsi */
-        overflow-y: visible;    /* Abilita lo scroll naturale */
-        padding-top: 60px;     /* Più spazio per l'header mobile */
+        display: block !important; /* Forza il flusso verticale semplice */
+        height: auto !important;
+        min-height: 100vh;
+        overflow-y: visible !important;
+        padding-top: 80px; /* Spazio per il logo/burger */
     }
 
-    /* Colonna 1: Immagine */
-    .col-image {
-        width: 100%;
-        height: auto;
-        padding: 20px 5%;     /* Margini laterali uniformi */
-        justify-content: center;
+    /* 2. Reset universale per le colonne */
+    .col-image, .col-info, .col-text {
+        width: 100% !important;
+        height: auto !important; /* Impedisce di bloccare l'altezza */
+        position: static !important; /* Rimuove eventuali fix/absolute */
+        padding: 40px 8% !important; /* Padding uniforme */
+        display: block !important;
+        overflow: visible !important; /* Rimuove barre di scorrimento interne */
     }
 
+    /* Immagine */
     .fixed-img {
-        max-height: 50vh;      /* Non troppo grande per lasciare spazio al testo */
-        filter: grayscale(0%); /* Sempre a colori su mobile */
+        width: 100%;
+        max-width: 400px; /* Evita che diventi gigantesca */
+        height: auto;
+        max-height: none;
+        margin: 0 auto;
+        display: block;
+        filter: grayscale(0%);
     }
 
-    /* Colonna 2: Testo di presentazione (Info Mono) */
+    /* Colonna Info (quella centrale) */
     .col-info {
-        width: 100%;
-        height: auto;
-        padding: 30px 5%;
-        justify-content: flex-start; /* Su mobile meglio allineato in alto */
+        background-color: transparent; /* Se vuoi mantenere continuità */
     }
 
     .info-bottom p {
-        font-size: 0.95rem;    /* Leggermente più piccolo per leggibilità */
+        font-size: 1rem;
+        line-height: 1.5;
         text-align: left;
     }
 
-    /* Colonna 3: Curriculum */
+    /* Colonna Resume/Text */
     .col-text {
-        width: 100%;
-        height: auto;
-        padding: 40px 5%;      /* Reset del padding 20vh del desktop */
-        overflow-y: visible;   /* Lo scroll è gestito dal body */
+        border-left: none !important; /* Rimuove bordi se presenti nel desktop */
+        padding-bottom: 80px !important; /* Spazio prima del footer */
     }
 
-    /* Ottimizzazione dettagli curriculum */
+    /* Ottimizzazione elementi CV */
     .resume-item {
-        padding-left: 26px;       /* Rimuoviamo lo sbalzo a destra per guadagnare spazio */
-        margin-bottom: 35px;
+padding-left: 26px; /* Rimuoviamo lo sbalzo a destra per guadagnare spazio */
+margin-bottom: 35px;
+}
+
+.section-title {
+margin-bottom: 25px;
+font-size: 1.1rem;
+}
+.cv-link {
+padding-left: 0; /* Allineato a sinistra */
+margin-top: 20px;
+margin-bottom: 60px;
+width: 100%;
+text-align: left;
+}
+
+    /* Nascondiamo definitivamente la barra di scorrimento e i suoi contenitori */
+    .scroll-progress-container-left,
+    .scroll-progress-bar,
+    .col-text::-webkit-scrollbar {
+        display: none !important;
     }
 
-    .section-title {
-        margin-bottom: 25px;
-        font-size: 1.1rem;
-    }
-
-    .cv-link {
-        padding-left: 0;       /* Allineato a sinistra */
-        margin-top: 20px;
-        margin-bottom: 60px;
-        width: 100%;
-        text-align: left;
+    /* Rimuoviamo scrollbar per Firefox */
+    .col-text {
+        scrollbar-width: none;
     }
 }
 /* --- Pagina Projects --- */
