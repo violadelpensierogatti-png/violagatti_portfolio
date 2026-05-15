@@ -567,7 +567,7 @@ nav a:hover, .lang-switch:hover {
     top: 15vh; /* Allineata all'inizio del tuo padding-top */
     float: left; /* Spostata a sinistra */
     width: 2px;
-    height: 690px; /* Più corta come richiesto */
+    height: 80%; /* Più corta come richiesto */
     background-color: rgba(110, 111, 218, 0.15); 
     margin-bottom: -220px; /* Pareggia l'altezza per non occupare spazio verticale */
     z-index: 2000;
@@ -877,7 +877,7 @@ nav a:hover, .lang-switch:hover {
     top: 40px; /* Distanza dall'alto del contenitore mentre scorri */
     float: right; /* La spinge verso la sidebar */
     width: 2px;
-    height: 815px; /* Altezza visibile della barra */
+    height: 91%; /* Altezza visibile della barra */
     background-color: rgba(110, 111, 218, 0.2); /* Grigio/Viola chiaro visibile subito */
     z-index: 9999;
     pointer-events: none;
