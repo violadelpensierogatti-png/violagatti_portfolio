@@ -83,15 +83,20 @@ header {
     align-items: center;
     padding: 0 5%;
     z-index: 1000;
+    /* Rimuovi eventuali background qui se vuoi che sia trasparente */
 }
 
 
-
 .header-content {
-    width: 100%;
+    width: 100%; /* Fondamentale */
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Spinge logo a sx e nav a dx */
     align-items: center;
+}
+nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Forza la nav verso destra se il contenitore è largo */
 }
 
 .logo {
@@ -150,6 +155,17 @@ nav a:hover, .lang-switch:hover {
     background-color: var(--bg-color);
     padding: 100px 5% 50px 5%;
     margin-top: 50px;
+}
+
+@media screen and (max-width: 768px) {
+    nav {
+        display: none; /* Nasconde la nav desktop su mobile */
+    }
+    
+    .burger {
+        display: flex; /* Mostra il burger a destra */
+        margin-left: auto; /* Lo tiene ancorato a destra anche se manca la nav */
+    }
 }
 
 /*--- FOOTER A STRISCIA ---*/
@@ -429,8 +445,9 @@ nav a:hover, .lang-switch:hover {
 }
 
 /* --- BURGER ICON (DUE LINEE) --- */
+/* --- STRUTTURA UNIVERSALE (Per tutte le pagine) --- */
 .burger {
-    display: none; /* NASCOSTO DI BASE SU DESKTOP */
+    display: none; /* Nascosto su desktop */
     width: 25px;
     height: 14px;
     position: relative;
@@ -444,29 +461,31 @@ nav a:hover, .lang-switch:hover {
     display: block;
     width: 100%;
     height: 1.5px;
-    background-color: var(--primary);
+    background-color: var(--primary); /* Viola di default */
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Animazione quando il menu è aperto (diventa una X) */
-.burger.active span {
-    background-color: var(--secondary); /* Diventa arancione */
+/* --- COLORE SPECIFICO INDEX (Vince grazie all'ID) --- */
+#burger-index span {
+    background-color: var(--bg-color) !important;
 }
 
-.burger.active span:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
+/* Se il menu è aperto (active), deve tornare arancione anche in Index? */
+#burger-index.active span {
+    background-color: var(--secondary) !important;
 }
 
-.burger.active span:nth-child(2) {
-    transform: translateY(-6.5px) rotate(-45deg);
+#burger-index.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg) !important;
 }
 
-/* --- MOBILE RESPONSIVE --- */
+#burger-index.active span:nth-child(2) {
+    transform: translateY(-6.5px) rotate(-45deg) !important;
+}
+/* --- MOBILE --- */
 @media screen and (max-width: 768px) {
-    
-    /* MOSTRA IL BURGER SOLO QUI */
     .burger {
-        display: flex; 
+        display: flex; /* Riappare correttamente */
     }
 
   /* NASCONDI LA NAVIGAZIONE STANDARD */
@@ -822,7 +841,7 @@ text-align: left;
 
 .project-name {
     font-family: var(--font-main);
-    font-size: 2.8rem;
+    font-size: 3rem;
     color: var(--primary);
     text-transform: uppercase;
     width: 35%; /* Occupa la parte sinistra */
@@ -862,32 +881,36 @@ text-align: left;
     text-align: right;
 }
 
-/* --- Container Foto: Fascia Centrale --- */
+/* --- Container Foto: Centrato e Fisso --- */
 #hover-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     pointer-events: none;
-    z-index: 9999; 
+    z-index: 5; /* Regola lo z-index per stare sopra/sotto il testo */
     opacity: 0;
-    background: none !important;
-    /* La transizione solo sull'opacity rende l'ingresso fluido ma istantaneo */
-    transition: opacity 0.15s ease-in-out;
+    transition: opacity 0.4s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .floating-img {
-    position: absolute;
-    width: 180px; /* Leggermente più grandi */
-    height: auto;
-    border-radius: 2px;
-    will-change: opacity, transform; /* Ottimizza il rendering della GPU */
-    background: transparent !important; /* Forza lo sfondo vuoto */
-    backface-visibility: hidden;         /* Previene glitch di rendering */
-    -webkit-user-drag: none;  
-    mix-blend-mode: multiply;           
+    position: absolute; /* Fondamentale per il parallax nel JS */
+    width: 30vw; /* Dimensione centrale */
+    max-height: 80vh;
+    object-fit: contain;
+    mix-blend-mode: multiply; /* Effetto artistico col background grigio */
+    pointer-events: none;
 }
+/* Quando l'hover è attivo, aggiungiamo un leggero zoom in JS o CSS */
+#hover-container.active .floating-img {
+    transform: scale(1.05);
+}
+
+
 @media screen and (max-width: 768px) {
     #hover-container {
         display: none;

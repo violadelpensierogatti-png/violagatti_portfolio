@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // --- 0. DICHIARAZIONE VARIABILI GLOBALI (Prendi gli elementi una volta sola) ---
     const cursor = document.getElementById('cursor-effect');
-    const burger = document.getElementById('burger');
+    const burger = document.querySelector('.burger');
     const nav = document.getElementById('nav-menu');
     const spawnContainer = document.getElementById('spawn-container');
     const gallery = document.querySelector('.col-gallery');
@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
             burger.classList.toggle('active');
         });
 
+    
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
                 nav.classList.remove('active');
@@ -101,79 +102,71 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // SPAWN IMMAGINI PROGETTI 
-        // Creiamo un oggetto per memorizzare le immagini già caricate
-        const preloadedImages = {};
-
-        function preloadProjectImages() {
-            projectItems.forEach(item => {
-                const sources = item.getAttribute('data-images').split(',');
-                const id = item.innerText.trim(); // Usiamo il nome come chiave
-                preloadedImages[id] = [];
-
-                sources.forEach(src => {
-                    const img = new Image(); // Crea oggetto immagine in memoria
-                    img.src = src.trim();
-                    preloadedImages[id].push(img); // Il browser la scarica ora
-                });
-            });
-        }
-        // Avviamo il preload al caricamento della pagina
-        window.addEventListener('load', preloadProjectImages);
-
-        // movimento cursore e parallax
-        document.addEventListener('mousemove', (e) => {
-            requestAnimationFrame(() => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-                
-                const images = document.querySelectorAll('.floating-img');
-                images.forEach((img, i) => {
-                    const ratio = (i + 1) * 0.012; // Parallax leggermente più sottile
-                    const moveX = (window.innerWidth / 2 - e.clientX) * ratio;
-                    const moveY = (window.innerHeight / 2 - e.clientY) * ratio;
-                    img.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px)) rotate(${img.dataset.rotation}deg)`;
-                });
-            });
-        });
-        // eventi hover
+    // --- 3.5 SPAWN IMMAGINE SINGOLA CENTRALE (PROGETTI) ---
+    
+    // Preload (manteniamolo, è utile)
+    const preloadedImages = {};
+    function preloadProjectImages() {
         projectItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                const id = item.innerText.trim();
-                const sources = item.getAttribute('data-images').split(',');
-                hoverContainer.innerHTML = ''; 
-                
-                const rect = item.getBoundingClientRect();
-                const centerY = rect.top + (rect.height / 2);
-                const slotsX = [31, 43, 56, 70];
-
-                sources.forEach((src, index) => {
-                    if (index < slotsX.length) {
-                        const img = document.createElement('img');
-                        img.src = src.trim();
-                        img.className = 'floating-img';
-
-                        const rotation = (index % 2 === 0) ? -4 : 4;
-                        img.dataset.rotation = rotation; // Salviamo la rotazione per il parallax
-
-                        img.style.left = `${slotsX[index]}%`;
-                        img.style.top = `${centerY + (index % 2 === 0 ? -15 : 15)}px`;
-                        
-                        // Applichiamo la trasformazione iniziale
-                        img.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
-                        
-                        hoverContainer.appendChild(img);
-                    }
-                });
-
-                hoverContainer.style.opacity = '1';
+            const sources = item.getAttribute('data-images').split(',');
+            const id = item.innerText.trim();
+            preloadedImages[id] = [];
+            sources.forEach(src => {
+                const img = new Image();
+                img.src = src.trim();
+                preloadedImages[id].push(img);
             });
+        });
+    }
+    window.addEventListener('load', preloadProjectImages);
 
-            item.addEventListener('mouseleave', () => {
-                hoverContainer.style.opacity = '0';
+    // Gestione Hover Progetti
+    projectItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            const sources = item.getAttribute('data-images').split(',');
+            const firstImageSrc = sources[0].trim(); // Prendiamo solo la prima
+            
+            hoverContainer.innerHTML = ''; // Svuota tutto
+            
+            const img = document.createElement('img');
+            img.src = firstImageSrc;
+            img.className = 'floating-img';
+
+            // Reset posizioni per centratura assoluta
+            img.style.left = '50%';
+            img.style.top = '50%';
+            img.style.transform = 'translate(-50%, -50%) scale(0.95)';
+            img.style.opacity = '0';
+            img.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease';
+            
+            hoverContainer.appendChild(img);
+            
+            requestAnimationFrame(() => {
+                hoverContainer.style.opacity = '1';
+                img.style.opacity = '1';
+                img.style.transform = 'translate(-50%, -50%) scale(1)';
             });
         });
 
+        item.addEventListener('mouseleave', () => {
+            hoverContainer.style.opacity = '0';
+        });
+    });
+
+    // UNICO Listener per il Parallax (Modifica quello esistente o usa questo)
+    // Assicurati di non avere altri document.addEventListener('mousemove') che resettano img.style.transform
+    document.addEventListener('mousemove', (e) => {
+        if (hoverContainer && hoverContainer.style.opacity === '1') {
+            const currentImg = hoverContainer.querySelector('.floating-img');
+            if (currentImg) {
+                const ratio = 0.02;
+                const moveX = (window.innerWidth / 2 - e.clientX) * ratio;
+                const moveY = (window.innerHeight / 2 - e.clientY) * ratio;
+                // Applichiamo il parallax mantenendo la centratura
+                currentImg.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px)) scale(1)`;
+            }
+        }
+    });
 
     // --- 4. BARRA SCROLL (PAGINE PROGETTO) ---
     if (gallery && progressBar) {
