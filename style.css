@@ -19,6 +19,21 @@
     font-weight: 500; /* Medium */
     font-style: normal;
 }
+@font-face {
+    font-family: 'Austin';
+    src: url('fonts/Austin-SemiboldItalic.otf') format('opentype');
+    font-weight: 500; /* Semi-Bold */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Austin';
+    src: url('fonts/Austin-ItalicNo2.otf') format('opentype');
+    font-weight: 300; 
+    font-style: normal;
+}
+
+
 
 /* Reset e Variabili */
 * {
@@ -33,6 +48,7 @@
     --secondary: #FF8B73;
     --font-main: 'Everett', sans-serif;
     --font-menu: 'IBM Plex Sans', sans-serif; 
+    --font-hero: 'Austin';
 }
 
 body {
@@ -52,6 +68,10 @@ body, html {
     height: auto;
 }
 
+.body-index {
+    background-color: var(--primary);
+}
+
 /* Header */
 header {
     height: 70px;
@@ -65,6 +85,8 @@ header {
     z-index: 1000;
 }
 
+
+
 .header-content {
     width: 100%;
     display: flex;
@@ -73,9 +95,11 @@ header {
 }
 
 .logo {
-    font-weight: medium;
+    font-family: var(--font-hero);
+    font-weight: 300;
     font-size: 1.5rem;
     color: var(--primary);
+    letter-spacing: 4%;
 }
 
 nav a {
@@ -83,24 +107,40 @@ nav a {
     text-decoration: none;
     color: var(--primary);
     margin-left: 30px;
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 400;
     text-transform: lowercase; /* Mantiene about me, projects, contacts minuscoli */
     transition: color 0.3s ease;
     display: block;
 }
 
+#nav-menu-index a {
+    color: var(--bg-color);
+}
+#lang-switch-index {
+    color: var(--bg-color);
+}
+
+
 .lang-switch {
     font-family: var(--font-menu);
     color: var(--primary);
     margin-left: 30px;
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 500; /* Leggermente più marcato per lo switch */
     text-transform: uppercase; /* Forza IT | EN in maiuscolo */
     cursor: pointer;
 }
 
 nav a:hover, .lang-switch:hover {
+    color: var(--secondary);
+}
+
+#nav-menu-index a:hover, #lang-switch-index:hover {
+    color: var(--secondary);
+}
+
+.logo:hover {
     color: var(--secondary);
 }
 
@@ -246,18 +286,19 @@ nav a:hover, .lang-switch:hover {
 }
 
 .hero-subtitle {
-    color: var(--primary);
-    font-family: var(--font-main); /* Assicurati che usi Everett */
-    font-size: 4vw; 
+    color: var(--bg-color);
+    font-family: var(--font-main); 
+    font-size: 3.5vw; 
     line-height: 1;
-    text-transform: lowercase;
-    width: 100%; 
+    text-transform: uppercase;
+    width: 97%; 
     display: flex;
+    text-align: justify;
     justify-content: space-between; 
-    margin-bottom: 0.5vw;
     position: relative;
     z-index: 10; /* Lo tiene sopra eventuali aree invisibili del titolo */
     pointer-events: none;
+    margin-left: 2vw;
 }
 
 .hero-sub-link {
@@ -275,18 +316,17 @@ nav a:hover, .lang-switch:hover {
 
 /* Assicurati che anche il titolo abbia la larghezza piena */
 .hero-title {
-    color: var(--primary);
-    font-size: 15.5vw;
+    font-family: var(--font-hero);
+    font-weight: 300;
+    color: var(--bg-color);
+    font-size: 22vw;
     line-height: 0.8;
     white-space: nowrap;
-    width: 100%; /* Forza la larghezza totale */
     justify-content: space-between;
     text-align: justify;
-    text-align-last: justify; 
-    margin: 0;
-    letter-spacing: -0.02em; /* Opzionale: per un look più compatto e pro */
     text-decoration: none;
     pointer-events: none;
+    margin: 0;
 }
 
 .hero-link {
@@ -311,9 +351,8 @@ nav a:hover, .lang-switch:hover {
     .hero-bottom-container {
         display:flex;
         padding: 0 1%; /* Margine laterale minimo per far toccare quasi i bordi */
-        box-sizing: border-box;
         width: 94%; /* Manteniamo la stessa proporzione del desktop */
-        margin: 0 auto;
+        align-items: center;
     }
 
     /* Sottotitolo più grande sopra il titolo */
@@ -321,32 +360,27 @@ nav a:hover, .lang-switch:hover {
         display: flex;
         flex-direction: row;
         justify-content: space-between; 
-        width: 100%;
-        font-size: 5.5vw; /* Ingrandito come richiesto */
-        margin-bottom: 16px; /* Poco margine sotto rispetto al titolo */
-        text-transform: lowercase;
+        width: 98%;
+        font-size: 3.8vw; /* Ingrandito come richiesto */
+
     }
 
     /* Titolo: Uno sopra l'altro, occupa tutta la larghezza */
     .hero-title {
-        flex-direction: column; 
-        font-size: 32vw; /* Dimensione massimizzata per l'impatto */
+        font-size: 21vw; /* Dimensione massimizzata per l'impatto */
         /* font-weight: 500; */
-        line-height: 0.8; /* Line-height ridotto per "impacchettare" le scritte */
+        line-height: 0.9; /* Line-height ridotto per "impacchettare" le scritte */
         width: 100%;
-        margin: 0;
         text-align: justify;
     }
 
     /* Forza VIOLA e GATTI a stirarsi da bordo a bordo */
     .hero-title span {
-        display: block;
         width: 100%;
         text-align-last: justify; /* Fondamentale per il full-width su singola parola */
-        text-transform: uppercase;
     }
     .hero-link:hover {
-    color: var(--primary); /* Usa la tua variabile arancione */
+    color: var(--secondary); /* Usa la tua variabile arancione */
 }
 
 
@@ -794,6 +828,32 @@ text-align: left;
     width: 35%; /* Occupa la parte sinistra */
 }
 
+/* --- EFFETTO HOVER --- */
+.project-item:hover .project-name {
+    color: var(--secondary);
+    font-family: var(--font-hero); /* Cambia il font */
+    font-weight: 300;
+    
+    /* Animazione di rotazione/distorsione */
+    animation: rotateFont 0.4s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- KEYFRAMES ANIMAZIONE --- */
+@keyframes rotateFont {
+    0% {
+        transform: rotateX(0deg) skewX(0deg);
+        opacity: 1;
+    }
+    40% {
+        transform: rotateX(90deg) skewX(10deg); /* Si "chiude" a metà */
+        opacity: 0.5;
+    }
+    100% {
+        transform: rotateX(0deg) skewX(0deg); /* Si riapre col nuovo font */
+        opacity: 1;
+    }
+}
+
 .project-category {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.9rem;
@@ -835,7 +895,16 @@ text-align: left;
     .project-name {
         font-size: 2.4rem;
     }
+    .project-item:hover .project-name {
+        animation: none; /* Rimuoviamo l'animazione su mobile per leggibilità */
+        font-family: var(--font-hero); /* Se vuoi che cambi comunque il font */
+    }
+    .project-name {
+        font-size: 2.4rem;
+        display: block; /* Su mobile meglio bloccare per evitare reflow */
+    }
 }
+
 
 /* --- zonzo --- */
 
